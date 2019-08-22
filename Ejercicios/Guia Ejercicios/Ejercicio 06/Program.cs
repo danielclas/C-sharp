@@ -20,41 +20,47 @@ namespace Ejercicio_06
 
       bool b = false;
       string aux = "";
+      string aux2 = "";
       int anio = 0;
+      int anio2 = 0;
+      int i = 0;
       char rta = 's';
 
       do
       {
         Console.WriteLine("Ingrese un año: ");
         aux = Console.ReadLine();
-        b = false;
 
-        if (int.TryParse(aux, out anio))
+        Console.WriteLine("Ingrese otro año: ");
+        aux2 = Console.ReadLine();
+
+        if (int.TryParse(aux, out anio) && int.TryParse(aux2, out anio2))
         {
-          if (anio > 0 && anio % 4 == 0)
+          Console.WriteLine("Años bisiestos: ");
+          for (i = anio; i < anio2; i++)
           {
-            if (anio % 100 == 0)
+            b = false;
+
+            if (i > 0 && i % 4 == 0)
             {
-              if (anio % 400 == 0)
+              if (i % 100 == 0)
+              {
+                if (i % 400 == 0)
+                {
+                  b = true;
+                }
+              }
+              else
               {
                 b = true;
               }
             }
-            else
+
+            if (b)
             {
-              b = true;
+              Console.WriteLine($"{i}");
             }
-          }
-
-          if (b)
-          {
-            Console.WriteLine("Es bisiesto!");
-          }
-          else
-          {
-            Console.WriteLine("No es bisiesto");
-          }
-
+          }                 
         }
         else
         {
