@@ -6,37 +6,44 @@ using System.Threading.Tasks;
 
 namespace Ejercicio_10
 {
-  class Program
-  {
-    static void Main(string[] args)
+    class Program
     {
-      /*Partiendo de la base del ejercicio anterior, se pide realizar un programa que imprima por pantalla
-      una pirámide como la siguiente:
-                            *
-                           ***
-                          *****
-                         *******
-                        *********
-      Nota: Utilizar estructuras repetitivas y selectivas.*/
+        static void Main(string[] args)
+        {
+            /*Partiendo de la base del ejercicio anterior, se pide realizar un programa que imprima por pantalla
+            una pirámide como la siguiente:
+                                  *
+                                 ***
+                                *****
+                               *******
+                              *********
+            Nota: Utilizar estructuras repetitivas y selectivas.*/
 
-      Console.Title = "Ejercicio 10";
+            Console.Title = "Ejercicio 10";
 
-      int index = 0;
-      int menos = 1;
-      string aux = "";
-      string pir = "";
+            int num = 0;
+            string aux = "";
+            StringBuilder pir = new StringBuilder("");
 
-      Console.WriteLine("Ingrese un nro.: ");
-      aux = Console.ReadLine();
+            Console.WriteLine("Ingrese un nro.: ");
+            aux = Console.ReadLine();
 
-      if (int.TryParse(aux, out index) && index > 0)
-      {
-        
+            if (int.TryParse(aux, out num) && num > 0)
+            {
 
+                pir.Insert(0, " ", num+1);
+                pir[pir.Length - 1] = '*';
+                Console.WriteLine("{0}", pir);
 
-      }
-      
-      Console.ReadKey();
+                for(int i=num-1; i >=0; i--)
+                {
+                    pir.Append('*');
+                    pir[i] = '*';
+                    Console.WriteLine("{0}", pir);
+                }
+            }
+
+            Console.ReadKey();
+        }
     }
-  }
 }
