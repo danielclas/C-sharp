@@ -35,6 +35,7 @@ namespace Ejercicio_13
                     Console.WriteLine("Ingrese nro. decimal: ");
                     num = double.Parse(Console.ReadLine());
                     bin = Conversor.DecimalBinario(num);
+                    bin = Conversor.FormatearBinario(bin);
                     Console.WriteLine($"Binario: {bin}");
 
                 }
@@ -63,8 +64,8 @@ namespace Ejercicio_13
                 result = result / 2;
                 aux.Append(module.ToString());
 
-            } while (result /2!=1);
-            
+            } while (result / 2 != 1);
+
             module = result % 2;
             result = result / 2;
             aux.Append(module.ToString());
@@ -94,6 +95,43 @@ namespace Ejercicio_13
             }
 
             return dec;
+
+        }
+
+        public static string FormatearBinario(string bin)
+        {
+            string newBin="";
+            int resto = 0;
+            int i;
+
+            if (bin.Length >= 5)
+            {
+                resto = bin.Length % 4;
+
+                for (i = 0; i < resto; i++)
+                {
+                    newBin += bin[i];
+                }
+
+                newBin += ' ';
+                for (int j=1 ; i < bin.Length; i++, j++)
+                {
+                    newBin += bin[i];
+                    if (j%4==0)
+                    {
+                        newBin += ' ';
+                        j = 1;
+                    }
+                }
+
+
+            }
+            else
+            {
+                newBin = bin;
+            }
+
+            return newBin;
 
         }
     }
