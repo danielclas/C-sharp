@@ -6,111 +6,162 @@ using System.Threading.Tasks;
 
 namespace Ejercicio_07
 {
-  class Program
-  {
-    static void Main(string[] args)
+    class Program
     {
-      /*Hacer un programa que pida por pantalla la fecha de nacimiento de una persona(día, mes y año) y
-      calcule el número de días vividos por esa persona hasta la fecha actual(tomar la fecha del sistema
-      con DateTime.Now).
-      Nota: Utilizar estructuras selectivas.Tener en cuenta los años bisiestos.*/
-
-      Console.Title = "Ejercicio 07";
-
-      int anio, mes, dia;
-      int dif;
-      int i;
-      int acumDias = 0;
-      bool b = false;
-      double dias = 0;
-      DateTime nacimiento;
-
-      Console.WriteLine("Año de nacimiento: ");
-      anio = int.Parse(Console.ReadLine());
-
-      Console.WriteLine("Mes de nacimiento: ");
-      mes = int.Parse(Console.ReadLine());
-
-      Console.WriteLine("Dia de nacimiento: ");
-      dia = int.Parse(Console.ReadLine());
-
-      nacimiento = new DateTime(anio, mes, dia);
-
-      Console.Clear();
-
-      dif = DateTime.Now.Year - nacimiento.Year;
-
-      if (DateTime.Now.Month <= nacimiento.Month)
-      {
-        if (DateTime.Now.Month == nacimiento.Month)
+        static void Main(string[] args)
         {
-          if (DateTime.Now.Day < nacimiento.Day)
-          {
-            dif--;
-          }
-        }
-        else
-        {
-          dif--;
-        }
-      }
+            /*Hacer un programa que pida por pantalla la fecha de nacimiento de una persona(día, mes y año) y
+            calcule el número de días vividos por esa persona hasta la fecha actual(tomar la fecha del sistema
+            con DateTime.Now).
+            Nota: Utilizar estructuras selectivas.Tener en cuenta los años bisiestos.*/
 
-      dias = dif * 365;
+            Console.Title = "Ejercicio 07";
 
-      for (int j = nacimiento.Month ; j < DateTime.Now.Month; j++)
-      {
-        if (j % 2 == 0)
-        {
-          if (j == 2) {
-            acumDias += 28;
-          }
-          else
-          {
-            acumDias += 30;
-          }          
-        }
-        else
-        {
-          acumDias += 31;
-        }
-      }
+            int anio, mes, dia;
+            int dif;
+            int i;
+            int acumDias = 0;
+            int times = 5;
+            bool b = false;
+            double dias = 0;
+            DateTime nacimiento;
 
-      dias += acumDias;
-
-      if (DateTime.Now.Day>nacimiento.Day)
-      {
-        dias += DateTime.Now.Day - nacimiento.Day;
-      }
-      
-
-      for (i = nacimiento.Year; i < DateTime.Now.Year; i++)
-      {      
-        if (i > 0 && i % 4 == 0)
-        {
-          if (i % 100 == 0)
-          {
-            if (i % 400 == 0)
+            do
             {
-              b = true;
-            }
-          }
-          else
-          {
-            b = true;
-          }
+                dif = 0;
+                acumDias = 0;
+                dias = 0;
+
+                Console.WriteLine("Año de nacimiento: ");
+                anio = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("Mes de nacimiento: ");
+                mes = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("Dia de nacimiento: ");
+                dia = int.Parse(Console.ReadLine());
+
+                nacimiento = new DateTime(anio, mes, dia);
+
+                Console.Clear();
+
+                dif = DateTime.Now.Year - nacimiento.Year;
+
+                dias = dif * 365;
+
+                /*for (int j = nacimiento.Month; j < DateTime.Now.Month; j++)
+                {
+                    if (j % 2 == 0)
+                    {
+                        if (j == 2)
+                        {
+                            acumDias += 28;
+                        }
+                        else
+                        {
+                            acumDias += 30;
+                        }
+                    }
+                    else
+                    {
+                        acumDias += 31;
+                    }
+                }*/
+
+                if (nacimiento.Month < DateTime.Now.Month)
+                {
+                    for (int j = nacimiento.Month; j < DateTime.Now.Month; j++)
+                    {
+                        acumDias += DiasEnMeses(j);
+                    }
+                    dias += acumDias;
+                }
+                else if (DateTime.Now.Month<nacimiento.Month)
+                {
+                    for (int j = DateTime.Now.Month; j != nacimiento.Month; j++)
+                    {
+                        acumDias += DiasEnMeses(j);
+                        if (j == 12)
+                            j = 0;
+                    }
+                    dias -= acumDias;
+                }               
+
+
+                if (DateTime.Now.Day > nacimiento.Day)
+                {
+                    dias += DateTime.Now.Day - nacimiento.Day;
+                }
+
+                for (i = nacimiento.Year; i < DateTime.Now.Year; i++)
+                {
+                    if (EsBisiesto(i))
+                    {
+                        dias++;
+                    }
+                }
+
+                Console.WriteLine($"Tenes {dif} años, viviste {dias} dias");
+                Console.ReadKey();
+                Console.Clear();
+                times--;
+
+            } while (times >= 0);
         }
 
-        if (b)
+        public static bool EsBisiesto(int i)
         {
-          dias++;
+            bool b = false;
+
+            if (i > 0 && i % 4 == 0)
+            {
+                if (i % 100 == 0)
+                {
+                    if (i % 400 == 0)
+                    {
+                        b = true;
+                    }
+                }
+                else
+                {
+                    b = true;
+                }
+            }
+
+            return b;
         }
 
-        b = false;
-      }
+        public static int DiasEnMeses(int m)
+        {
+            int dias = 0;
 
-      Console.WriteLine($"Tenes {dif} años, viviste {dias} dias");
+            switch (m)
+            {
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    dias = 31;
+                    break;
+                case 2:
+                    dias = 28;
+                    break;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    dias = 30;
+                    break;
+                default:
+                    break;
+            }
 
-      Console.ReadKey();
+            return dias;
+
+
+        }
     }
-  }
 }
