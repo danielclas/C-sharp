@@ -15,7 +15,7 @@ namespace Ejercicio_13
             double BinarioDecimal(string). Convierte un número binario a entero.*/
 
             Console.Title = "Ejercicio 13";
-
+            
             char rta = '1';
             string aux = "";
             string bin = "";
@@ -66,6 +66,9 @@ namespace Ejercicio_13
             StringBuilder aux = new StringBuilder("");
             int module;
             int result = (int)num;
+            int divInt;
+            int times = 0;
+            double fract = num%1;
 
             do
             {
@@ -85,6 +88,23 @@ namespace Ejercicio_13
             {
                 bin += auxBin[i];
             }
+
+            if (fract!=0)
+            {
+                bin += '.';
+                //La parte fraccionaria por dos, guardo el entero
+                do
+                {
+                    fract = fract * 2;
+                    divInt = (int)fract;
+                    if (fract>=1)
+                    {
+                        fract = fract % 1;
+                    }
+                    bin += divInt.ToString();
+                    times++;
+                } while (times<4);
+            }          
 
             return bin;
 
