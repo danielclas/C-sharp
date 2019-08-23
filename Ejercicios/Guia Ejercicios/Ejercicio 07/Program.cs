@@ -80,7 +80,8 @@ namespace Ejercicio_07
       if (DateTime.Now.Day>nacimiento.Day)
       {
         dias += DateTime.Now.Day - nacimiento.Day;
-      }      
+      }
+      
 
       for (i = nacimiento.Year; i < DateTime.Now.Year; i++)
       {      
