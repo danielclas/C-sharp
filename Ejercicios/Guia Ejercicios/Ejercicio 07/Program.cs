@@ -19,10 +19,8 @@ namespace Ejercicio_07
 
             int anio, mes, dia;
             int dif;
-            int i;
             int acumDias = 0;
             int times = 5;
-            bool b = false;
             double dias = 0;
             DateTime nacimiento;
 
@@ -41,32 +39,11 @@ namespace Ejercicio_07
                 Console.WriteLine("Dia de nacimiento: ");
                 dia = int.Parse(Console.ReadLine());
 
-                nacimiento = new DateTime(anio, mes, dia);
-
-                Console.Clear();
+                nacimiento = new DateTime(anio, mes, dia);            
 
                 dif = DateTime.Now.Year - nacimiento.Year;
 
                 dias = dif * 365;
-
-                /*for (int j = nacimiento.Month; j < DateTime.Now.Month; j++)
-                {
-                    if (j % 2 == 0)
-                    {
-                        if (j == 2)
-                        {
-                            acumDias += 28;
-                        }
-                        else
-                        {
-                            acumDias += 30;
-                        }
-                    }
-                    else
-                    {
-                        acumDias += 31;
-                    }
-                }*/
 
                 if (nacimiento.Month < DateTime.Now.Month)
                 {
@@ -76,7 +53,7 @@ namespace Ejercicio_07
                     }
                     dias += acumDias;
                 }
-                else if (DateTime.Now.Month<nacimiento.Month)
+                else if (DateTime.Now.Month < nacimiento.Month)
                 {
                     for (int j = DateTime.Now.Month; j != nacimiento.Month; j++)
                     {
@@ -85,15 +62,16 @@ namespace Ejercicio_07
                             j = 0;
                     }
                     dias -= acumDias;
-                }               
+                }
 
-
+                //Corrijo dias del mes corriente
                 if (DateTime.Now.Day > nacimiento.Day)
                 {
                     dias += DateTime.Now.Day - nacimiento.Day;
                 }
 
-                for (i = nacimiento.Year; i < DateTime.Now.Year; i++)
+                //Agrego dias por años bisiestos
+                for (int i = nacimiento.Year; i < DateTime.Now.Year; i++)
                 {
                     if (EsBisiesto(i))
                     {
@@ -102,10 +80,11 @@ namespace Ejercicio_07
                 }
 
                 Console.WriteLine($"Tenes {dif} años, viviste {dias} dias");
-                Console.ReadKey();
-                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                Console.WriteLine("---------------------------");
+                Console.ResetColor();
+                Console.ReadKey();                
                 times--;
-
             } while (times >= 0);
         }
 
