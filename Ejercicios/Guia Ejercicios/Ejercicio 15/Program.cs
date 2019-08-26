@@ -23,7 +23,7 @@ namespace Ejercicio_15
 
             Console.Title = "Ejercicio 15";
 
-            double a, b, rta;
+            double a, b;
             char o;
             int times = 0;
 
