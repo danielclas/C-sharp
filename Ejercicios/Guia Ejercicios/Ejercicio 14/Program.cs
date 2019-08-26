@@ -53,11 +53,9 @@ namespace Ejercicio_14
                         Console.WriteLine(area);
                         break;
                     case '3':
-                        Console.WriteLine("Ingrese lado 1: ");
+                        Console.WriteLine("Ingrese radio del circulo: ");
                         lado1 = int.Parse(Console.ReadLine());
-                        Console.WriteLine("Ingrese lado 2: ");
-                        lado2 = int.Parse(Console.ReadLine());
-                        area = CalculoDeArea.CalcularCirculo(lado1, lado2);
+                        area = CalculoDeArea.CalcularCirculo(lado1);
                         Console.WriteLine(area);
                         break;
                     default:
@@ -85,17 +83,41 @@ namespace Ejercicio_14
         static public double CalcularTriangulo(double lado1, double lado2)
         {
             double area;
+            double a, b;
 
-            area = lado1 * lado1;
+            if (lado1 == lado2)
+            {
+                area = Math.Sqrt(3) / 4;
+                area *= lado1 * lado1;
+            }
+            else
+            {
+                if (lado1 > lado2)
+                {
+                    a = lado1;
+                    b = lado2;
+                }
+                else
+                {
+                    a = lado2;
+                    b = lado1;
+                }
+
+                area = (a * a) / 4;
+                area = (b * b) - area;
+                area = Math.Sqrt(area);
+                area *= b;
+                area = area / 2;
+            }
 
             return area;
         }
 
-        static public double CalcularCirculo(double lado1, double lado2)
+        static public double CalcularCirculo(double lado)
         {
             double area;
 
-            area = lado1 * lado1;
+            area = Math.PI * (lado * lado);
 
             return area;
         }
