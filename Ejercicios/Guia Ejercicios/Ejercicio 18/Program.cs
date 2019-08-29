@@ -40,9 +40,41 @@ namespace Ejercicio_18
       //g.Desarrollar un método de clase que muestre todos los datos del rectángulo que recibe como
       //parámetro
 
-      double x = Math.Abs(10.5);
+      /*************
+       *1          2 *
+       *             *
+       *             *
+       *             *
+       * 4         3 *
+       * ***********/
 
-      Console.WriteLine(x);
+      Console.Title = "Ejercicio 18";
+
+      Punto punto1 = new Punto(0,5);
+      Punto punto3 = new Punto(10,0);
+
+      Punto puntoA = new Punto(8, 12);
+      Punto puntoB = new Punto(20, 6);
+
+      Punto puntoJ = new Punto(6, 2);
+      Punto puntoK = new Punto(5, 3);
+
+      Rectangulo rec1 = new Rectangulo(punto1, punto3);
+      Rectangulo rec2 = new Rectangulo(puntoA, puntoB);
+      Rectangulo rec3 = new Rectangulo(puntoJ, puntoK);
+
+      Console.WriteLine($"Area: {rec1.GetArea()} Perimetro: {rec1.GetPerimetro()}");
+      Console.WriteLine($"Punto 1 X:{rec1.vertice1.GetX()} Y:{rec1.vertice1.GetY()} || Punto 2 X:{rec1.vertice2.GetX()} Y:{rec1.vertice2.GetY()}");
+      Console.WriteLine($"Punto 4 X:{rec1.vertice4.GetX()} Y:{rec1.vertice4.GetY()} || Punto 3 X:{rec1.vertice3.GetX()} Y:{rec1.vertice3.GetY()}");
+
+      Console.WriteLine($"Area: {rec2.GetArea()} Perimetro: {rec2.GetPerimetro()}");
+      Console.WriteLine($"Punto 1 X:{rec2.vertice1.GetX()} Y:{rec2.vertice1.GetY()} || Punto 2 X:{rec2.vertice2.GetX()} Y:{rec1.vertice2.GetY()}");
+      Console.WriteLine($"Punto 4 X:{rec2.vertice4.GetX()} Y:{rec2.vertice4.GetY()} || Punto 3 X:{rec2.vertice3.GetX()} Y:{rec1.vertice3.GetY()}");
+
+      Console.WriteLine($"Area: {rec3.GetArea()} Perimetro: {rec3.GetPerimetro()}");
+      Console.WriteLine($"Punto 1 X:{rec1.vertice1.GetX()} Y:{rec1.vertice1.GetY()} || Punto 2 X:{rec1.vertice2.GetX()} Y:{rec1.vertice2.GetY()}");
+      Console.WriteLine($"Punto 4 X:{rec1.vertice4.GetX()} Y:{rec1.vertice4.GetY()} || Punto 3 X:{rec1.vertice3.GetX()} Y:{rec1.vertice3.GetY()}");
+
       Console.ReadKey();
     }
   }

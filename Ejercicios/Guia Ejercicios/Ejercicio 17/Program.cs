@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,13 +31,13 @@ namespace Ejercicio_17
             //h.Al utilizar Pintar, si corresponde, se deberá dibujar por pantalla con el color de dicho
             //bolígrafo.
 
-            Console.Title = "Ejercicio 17";            string dibujo = "";            Boligrafo boligrafo1 = new Boligrafo(100, ConsoleColor.Blue);            Boligrafo boligrafo2 = new Boligrafo(90, ConsoleColor.Red);            Boligrafo boligrafo3 = new Boligrafo(30, ConsoleColor.Green);            Boligrafo boligrafo4 = new Boligrafo(0, ConsoleColor.Cyan);            Console.WriteLine($"Boligrafo 1: {boligrafo1.GetColor()}, {boligrafo1.GetTinta()}");
+            Console.Title = "Ejercicio 17";            string dibujo = "";            Boligrafo boligrafo1 = new Boligrafo(100, ConsoleColor.DarkBlue);            Boligrafo boligrafo2 = new Boligrafo(90, ConsoleColor.DarkRed);            Boligrafo boligrafo3 = new Boligrafo(30, ConsoleColor.DarkGreen);            Boligrafo boligrafo4 = new Boligrafo(0, ConsoleColor.DarkCyan);            Console.WriteLine($"Boligrafo 1: {boligrafo1.GetColor()}, {boligrafo1.GetTinta()}");
             Console.WriteLine($"Boligrafo 2: {boligrafo2.GetColor()}, {boligrafo2.GetTinta()}");
             Console.WriteLine($"Boligrafo 3: {boligrafo3.GetColor()}, {boligrafo3.GetTinta()}");
-            Console.WriteLine($"Boligrafo 4: {boligrafo4.GetColor()}, {boligrafo4.GetTinta()}");            boligrafo1.Pintar(80, out dibujo);            Console.ForegroundColor = boligrafo1.GetColor();            Console.WriteLine(dibujo);            boligrafo2.Pintar(100, out dibujo);            Console.ForegroundColor = boligrafo2.GetColor();            Console.WriteLine(dibujo);
+            Console.WriteLine($"Boligrafo 4: {boligrafo4.GetColor()}, {boligrafo4.GetTinta()}");            boligrafo1.Pintar(80, out dibujo);            Console.BackgroundColor = boligrafo1.GetColor();            Console.WriteLine(dibujo);            boligrafo2.Pintar(100, out dibujo);            Console.BackgroundColor = boligrafo2.GetColor();            Console.WriteLine(dibujo);
 
             Console.WriteLine("Recargando");            boligrafo2.Recargar();
-            boligrafo2.Pintar(99, out dibujo);            Console.WriteLine(dibujo);                   boligrafo3.Pintar(20, out dibujo);            Console.ForegroundColor = boligrafo3.GetColor();            Console.WriteLine(dibujo);            boligrafo4.Pintar(10, out dibujo);            Console.ForegroundColor = boligrafo4.GetColor();            Console.WriteLine(dibujo);            Console.ReadKey();
+            boligrafo2.Pintar(99, out dibujo);            Console.WriteLine(dibujo);                   boligrafo3.Pintar(20, out dibujo);            Console.BackgroundColor = boligrafo3.GetColor();            Console.WriteLine(dibujo);            boligrafo4.Pintar(10, out dibujo);            Console.BackgroundColor = boligrafo4.GetColor();            Console.WriteLine(dibujo);            Console.ReadKey();
         }
     }
 
@@ -108,7 +108,7 @@ namespace Ejercicio_17
             {
                 for (; i < gasto; i++)
                 {
-                    cant += '-';
+                    cant += ' ';
                 }
 
                 cant += i;
