@@ -34,7 +34,7 @@ namespace Ejercicio_13
                     Console.WriteLine("Ingrese nro. binario (solo entero): ");
                     aux = Console.ReadLine();
                     num = Conversor.BinarioDecimal(aux);
-                    aux = Conversor.FormatearBinario(aux);
+                    //aux = Conversor.FormatearBinario(aux);
                     Console.Clear();
                     Console.WriteLine($"Binario: {aux}");
                     Console.WriteLine($"Decimal: {num}");
@@ -44,7 +44,7 @@ namespace Ejercicio_13
                     Console.WriteLine("Ingrese nro. decimal (entero o con coma): ");
                     num = double.Parse(Console.ReadLine());
                     bin = Conversor.DecimalBinario(num);
-                    bin = Conversor.FormatearBinario(bin);
+                    //bin = Conversor.FormatearBinario(bin);
                     Console.Clear();
                     Console.WriteLine($"Decimal: {num}");
                     Console.WriteLine($"Binario: {bin}");
