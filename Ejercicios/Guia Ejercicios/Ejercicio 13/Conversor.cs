@@ -31,7 +31,7 @@ namespace Ejercicio_13
           result = result / 2;
           aux.Append(module.ToString());
 
-        } while (result / 2 != 1) ;
+        }
 
         module = result % 2;
         result = result / 2;
