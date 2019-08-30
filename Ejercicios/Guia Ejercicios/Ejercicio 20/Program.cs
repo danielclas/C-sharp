@@ -36,7 +36,9 @@ namespace Ejercicio_20
 
             //h.Reutilizar el código.Sólo realizar las conversiones dentro de los operadores para dicho uso.
 
-          Console.Title = "Ejercicio 20";
+            Console.Title = "Ejercicio 20";
+
+            Console.ReadKey();
         }
-}
+    }
 }
