@@ -16,24 +16,28 @@ namespace Ejercicio_26.cs
             //b.Luego mostrar los positivos ordenados en forma decreciente.
             //c.Por último, mostrar los negativos ordenados en forma creciente.
 
-            Console.Title = "Ejercicio 26";            Random random = new Random();            int[] array = new int[20];            int[] may = new int[20];            int[] men = new int[20];            int j=0, k=0, aux=0;            Console.WriteLine("Array sin ordenar: \n");            for (int i = 0; i < array.Length; i++)
+            Console.Title = "Ejercicio 26";            Random random = new Random();            string mayores = "";            string menores = "";            string sArray = "";            int[] array = new int[20];            int[] may= new int[20];            int[] men= new int[20];            int j=0, k=0, aux=0;            Console.WriteLine("Array sin ordenar: \n");            //For que asigna al array gral., y al de mayores o menores segun corresponda            for (int i = 0; i < array.Length; i++)
             {
                 array[i] = random.Next(-100, 100);
                 if (array[i]<0)
                 {
-                    array[j] = array[i];
+                    men[j] = array[i];
                     j++;
                 }
                 else
                 {
-                    array[k] = array[i];
+                    may[k] = array[i];
                     k++;
                 }
-                Console.WriteLine(array[i]);
+                //Cada nro. se agrega al string
+                sArray += ($"{array[i].ToString()}, ");
             }
 
-            Console.WriteLine("Menores ordenados creciente\n");
-            //J es Length de mayores
+            //Remove de la ultima coma e imprimo
+            sArray = sArray.Remove(sArray.Length - 2);
+            Console.WriteLine(sArray);
+
+            Console.WriteLine("\nMenores ordenados creciente\n");
             for (int a = 0; a < j-1; a++)
             {
                 for (int b = a+1; b < j; b++)
@@ -49,16 +53,18 @@ namespace Ejercicio_26.cs
 
             for (int i = 0; i < j; i++)
             {
-                Console.WriteLine(men[i]);
+                menores += ($"{men[i].ToString()}, ");
             }
 
-            Console.WriteLine("Mayores ordenados decreciente\n");
-            //K es Length de mayores
+            menores = menores.Remove(menores.Length - 2);
+            Console.WriteLine(menores);
+
+            Console.WriteLine("\nMayores ordenados decreciente\n");
             for (int a = 0; a < k - 1; a++)
             {
                 for (int b = a + 1; b < k; b++)
                 {
-                    if (may[b] < may[a])
+                    if (may[b] > may[a])
                     {
                         aux = may[b];
                         may[b] = may[a];
@@ -69,9 +75,11 @@ namespace Ejercicio_26.cs
 
             for (int i = 0; i < k; i++)
             {
-                Console.WriteLine(may[k]);
+                mayores += ($"{may[i].ToString()}, ");
             }
 
+            mayores = mayores.Remove(mayores.Length - 2);
+            Console.WriteLine(mayores);
 
             Console.ReadKey();
 
