@@ -22,25 +22,25 @@ namespace Ejercicio_21
             c = 1000;
             k = 1000;
 
-            Console.WriteLine($"\nF: {f.GetGrados()} C: {c.GetGrados()} K: {k.GetGrados()}\n");
+            Console.WriteLine($"\nF: {f.GetGrados()} C: {c.GetGrados()} K: {k.GetGrados()}");
 
-            f = (Fahrenheit)c;
-            Console.WriteLine($"C a F: {f.GetGrados()}");
+            Console.WriteLine("\nConv. explicitas\n");
 
-            c = (Celsius)f;
-            Console.WriteLine($"F a C: {c.GetGrados()}");
+            Fahrenheit f2 = (Fahrenheit)c;
+            Kelvin k2 = (Kelvin)c;
 
-            f = (Fahrenheit)k;
-            Console.WriteLine($"K a F: {f.GetGrados()}");
+            Console.WriteLine($"Celsius a Fahrenheit {f2.GetGrados()} y Kelvin {k2.GetGrados()}");
 
-            k = (Kelvin)f;
-            Console.WriteLine($"F a K: {k.GetGrados()}");
+            Celsius c2 = (Celsius)f;
+            k2 = (Kelvin)f;
 
-            c = (Celsius)k;
-            Console.WriteLine($"K a C: {c.GetGrados()}");
+            Console.WriteLine($"\nFahrenheit a Celsius {c2.GetGrados()} y Kelvin {k2.GetGrados()}");
 
-            k = (Kelvin)c;
-            Console.WriteLine($"C a K: {k.GetGrados()}");
+            k2 = 1000;
+            c2 = (Celsius)k2;
+            f2 = (Fahrenheit)k2;
+
+            Console.WriteLine($"\nKelvin a Fahrenheit {f2.GetGrados()} y Celsius {c2.GetGrados()}");                       
 
             Console.ReadKey();
         }

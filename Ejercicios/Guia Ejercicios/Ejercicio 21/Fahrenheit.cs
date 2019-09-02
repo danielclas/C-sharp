@@ -28,7 +28,9 @@ namespace Ejercicio_21
         {
             Celsius celsius;
             double gradosF=f.GetGrados();
-            double gradosC = (gradosF - 32) * (5 / 9);
+            double gradosC = (gradosF - 32);
+            double r = (double)5 / 9;
+            gradosC *= r;
 
             celsius = new Celsius(gradosC);
 
@@ -39,7 +41,9 @@ namespace Ejercicio_21
         {
             Kelvin kelvin;
             double gradosF = f.GetGrados();
-            double gradosK = (gradosF + 459.67) * (5 / 9);
+            double gradosK = (gradosF + 459.67);
+            double r = (double) 5 / 9;
+            gradosK *= r;
 
             kelvin = new Kelvin(gradosK);
 
@@ -72,7 +76,8 @@ namespace Ejercicio_21
             Fahrenheit fahrenheit;
 
             double gradosK = k.GetGrados();
-            double gradosF = (gradosK * (9 / 5)) - 459.67;
+            double r = (double)9 / 5;
+            double gradosF = (gradosK * r) - 459.67;
 
             fahrenheit = new Fahrenheit(gradosF);
 
