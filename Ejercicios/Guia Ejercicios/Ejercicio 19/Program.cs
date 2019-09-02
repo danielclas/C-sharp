@@ -47,6 +47,9 @@ namespace Ejercicio_19
             //Uso de operador pipe 
             Console.WriteLine($"Misma cantidad de sumas: {s1|s2}");
 
+            //Conv. explicita de int
+            Console.WriteLine((int)s2);
+
             Console.ReadKey();
         }
     }
