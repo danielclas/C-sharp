@@ -53,7 +53,6 @@ namespace Ejercicio_22
                 rtnVal = true;
             }
 
-
             return rtnVal;
         }
 
