@@ -91,7 +91,7 @@ namespace Ejercicio_21
         {
             Kelvin kelvin = new Kelvin(k);
 
-            return k;
+            return kelvin;
         }
     }
 
@@ -130,10 +130,11 @@ namespace Ejercicio_21
 
         public static implicit operator Celsius(double c)
         {
-            Celsius kelvin = new Celsius(c);
+            Celsius celsius = new Celsius(c);
 
-            return c;
+            return celsius;
         }
+
 
     }
 }
