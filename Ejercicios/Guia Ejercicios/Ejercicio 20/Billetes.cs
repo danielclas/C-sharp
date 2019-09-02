@@ -54,7 +54,7 @@ namespace Billetes
 
             double cant = e.GetCantidad();
             double cot = GetCotizacion();
-            double eDolares = cant * cot;
+            double eDolares = cant / cot;
             double pCotDolar = Peso.GetCotizacion();
 
             peso = new Peso(eDolares * pCotDolar);
@@ -227,9 +227,9 @@ namespace Billetes
             Euro euro;
 
             double cant = d.GetCantidad();
-            double eCotDolar = Euro.GetCotizacion();
+            double eCotDolar = Euro.GetCotizacion();       
 
-            euro = new Euro(eCotDolar * cant);
+            euro = new Euro(cant / eCotDolar);
 
             return euro;
         }
@@ -428,7 +428,7 @@ namespace Billetes
             double cant = p.GetCantidad();
             double pCotDolar = Peso.GetCotizacion();
 
-            dolar = new Dolar(cant * pCotDolar);
+            dolar = new Dolar(cant / pCotDolar);
 
             return dolar;
         }
@@ -439,7 +439,7 @@ namespace Billetes
 
             double cant = p.GetCantidad();
             double cot = GetCotizacion();
-            double pDolares = cant * cot;
+            double pDolares = cant / cot;
             double eCotDolar = Euro.GetCotizacion();
 
             euro = new Euro(pDolares * eCotDolar);
