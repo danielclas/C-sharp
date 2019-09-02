@@ -16,6 +16,7 @@ namespace Ejercicio_21
             Celsius c = new Celsius(100);
             Kelvin k = new Kelvin(100);
 
+            Console.WriteLine($"Metodo GetGrados - F: {f.GetGrados()} - C: {c.GetGrados()} - K: {k.GetGrados()}\n");
             Console.WriteLine("Conv. implicitas desde double");
 
             f = 1000;

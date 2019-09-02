@@ -118,7 +118,8 @@ namespace Ejercicio_21
             Fahrenheit fahrenheit;
 
             double gradosC = c.GetGrados();
-            double gradosF = (gradosC * (9 / 5)) + 32;
+            double r = (double)9 / 5;
+            double gradosF = (gradosC * r) + 32;
             fahrenheit = new Fahrenheit(gradosF);
 
             return fahrenheit;
