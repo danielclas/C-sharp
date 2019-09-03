@@ -11,7 +11,7 @@ namespace Ejercicio_27
         static void Main(string[] args)
         {
             Console.Title = "Ejercicio 27";
-            Console.WriteLine("Lista: ");
+            Console.WriteLine("Lista:");
          
             List<int> lista = new List<int>();
             List<int> men = new List<int>();
@@ -67,8 +67,43 @@ namespace Ejercicio_27
 
             //---------------------------------------------------------//
 
+            Queue<int> enteros = new Queue<int>();
+            Queue<int> qMin= new Queue<int>();
+            Queue<int> qMay = new Queue<int>();
+            string sCola = "";
+            int aux = 0;
 
+            menores = "";
+            mayores = "";
 
+            for (int i = 0; i < 20; i++)
+            {
+                enteros.Enqueue(random.Next(-100, 100));
+                sCola += ($"{enteros.ElementAt(i)}, ");
+            }
+
+            Console.WriteLine("Cola:");
+            Console.WriteLine("Sin ordenar: \n");
+            sCola = sCola.Remove(sCola.Length - 2);
+            Console.WriteLine(sCola);
+
+            foreach (int n in enteros)
+            {
+                if (n<=0)
+                {
+                    qMin.Enqueue(n);
+                }
+                else
+                {
+                    qMay.Enqueue(n);
+                }
+            }         
+                        
+
+            Console.ReadKey();
+            Console.Clear();
+
+            //----------------------------------------------------//
 
         }
     }
