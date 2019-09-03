@@ -12,7 +12,7 @@ namespace Ejercicio_27
         {
             Console.Title = "Ejercicio 27";
             Console.WriteLine("Lista:");
-         
+
             List<int> lista = new List<int>();
             List<int> men = new List<int>();
             List<int> may = new List<int>();
@@ -21,17 +21,17 @@ namespace Ejercicio_27
 
             for (int i = 0; i < 20; i++)
             {
-                lista.Add(random.Next(-100,100));
+                lista.Add(random.Next(-100, 100));
                 sLista += ($"{lista[i]}, ");
             }
 
             Console.WriteLine("Lista sin ordenar: \n");
-            sLista=sLista.Remove(sLista.Length - 2);
+            sLista = sLista.Remove(sLista.Length - 2);
             Console.WriteLine(sLista);
 
             foreach (int n in lista)
             {
-                if (n<0)
+                if (n < 0)
                 {
                     men.Add(n);
                 }
@@ -68,10 +68,9 @@ namespace Ejercicio_27
             //---------------------------------------------------------//
 
             Queue<int> enteros = new Queue<int>();
-            Queue<int> qMin= new Queue<int>();
+            Queue<int> qMen = new Queue<int>();
             Queue<int> qMay = new Queue<int>();
             string sCola = "";
-            int aux = 0;
 
             menores = "";
             mayores = "";
@@ -89,16 +88,42 @@ namespace Ejercicio_27
 
             foreach (int n in enteros)
             {
-                if (n<=0)
+                if (n <= 0)
                 {
-                    qMin.Enqueue(n);
+                    qMen.Enqueue(n);
                 }
                 else
                 {
                     qMay.Enqueue(n);
                 }
-            }         
-                        
+            }
+
+            men = qMen.ToList();
+            men.Sort();
+            qMen = new Queue<int>(men);
+
+            foreach (int n in qMen)
+            {
+                menores+= ($"{n}, ");
+            }
+
+            menores = menores.Remove(menores.Length - 2);
+            Console.WriteLine("\nMenores ordenados: \n");
+            Console.WriteLine(menores);
+
+            may = qMay.ToList();
+            may.Sort();
+            may.Reverse();
+            qMay = new Queue<int>(may);
+
+            foreach (int n in qMay)
+            {
+                mayores+= ($"{n}, ");
+            }
+
+            mayores = mayores.Remove(mayores.Length - 2);
+            Console.WriteLine("\nMayores ordenados: \n");
+            Console.WriteLine(mayores);
 
             Console.ReadKey();
             Console.Clear();
