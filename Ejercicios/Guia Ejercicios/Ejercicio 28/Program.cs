@@ -17,22 +17,32 @@ namespace Ejercicio_28
             //diccionario e inicializar su contador en 1, caso contrario se deberá incrementar dicho contador.
             //Ordenar los resultados de forma descendente por cantidad de apariciones de cada palabra.
             //Informar mediante un MessageBox el TOP 3 de palabras con más apariciones.
-
-            Dictionary<string, int> dic = new Dictionary<string, int>();
-
-            
+                        
         }
     }
 
     public static class Texto
     {
         public static string texto = "";
-        private static string[] array = new string[1];
 
         public static void CapturarTexto(string texto)
         {
             Texto.texto = texto;
-            array = Texto.texto.Split(' ');
+            Dictionary<string, int> dic = new Dictionary<string, int>();
+
+            foreach (string palabra in texto.Split(' ', ',', '.'))
+            {
+                if (!dic.ContainsKey(palabra))
+                {
+                    dic.Add(palabra, 1);
+                }
+                else
+                {
+                    dic[palabra]++;
+                }               
+            }
+
+
         }
 
 
