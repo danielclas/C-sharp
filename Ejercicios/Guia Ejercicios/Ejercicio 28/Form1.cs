@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,6 +25,7 @@ namespace Ejercicio_28
         private void button1_Click(object sender, EventArgs e)
         {
             Texto.CapturarTexto(textBox1.Text);
+            
         }
     }
 }
