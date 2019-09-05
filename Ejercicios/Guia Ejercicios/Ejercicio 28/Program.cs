@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Ejercicio_28
 {
@@ -17,8 +18,9 @@ namespace Ejercicio_28
       //diccionario e inicializar su contador en 1, caso contrario se deberá incrementar dicho contador.
       //Ordenar los resultados de forma descendente por cantidad de apariciones de cada palabra.
       //Informar mediante un MessageBox el TOP 3 de palabras con más apariciones.
-
-
+      Application.EnableVisualStyles();
+      Application.SetCompatibleTextRenderingDefault(false);
+      Application.Run(new Form1());
 
     }
   }
@@ -32,8 +34,10 @@ namespace Ejercicio_28
       Texto.texto = texto;
       Dictionary<string, int> dic = new Dictionary<string, int>();
       Dictionary<string, int> max = new Dictionary<string, int>();
+      List<KeyValuePair<string, int>> list;
       string key="";
       string maximo = "";
+      string prevMax = "";
       int c = 0;
 
       foreach (string palabra in texto.Split(' ', ',', '.'))
@@ -47,14 +51,18 @@ namespace Ejercicio_28
           dic[palabra]++;
         }
       }
-
-      do
-      {
-        key=dic.Max().Key;
-        maximo += ($"Palabra: {key}, {dic[key]} veces\n");
-        dic[key] = 0;
+      
+      do{
+        key = dic.Max().Key;
+        if (key!=prevMax)
+        {
+          maximo += ($"Palabra: {key}, {dic[key]} veces - ");
+          //dic[key] = 0;
+        }     
         c++;
-      } while (c<3);      
+        prevMax = key;
+      } while (c<3);
+      
 
       return maximo;
     }

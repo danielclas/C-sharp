@@ -24,8 +24,14 @@ namespace Ejercicio_28
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Texto.CapturarTexto(textBox1.Text);
-            
+            string maximo=Texto.CapturarTexto(textBox1.Text);
+             textBox2.Text = maximo;
+
         }
-    }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+  }
 }
