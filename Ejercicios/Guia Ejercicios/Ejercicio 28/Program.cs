@@ -11,7 +11,7 @@ namespace Ejercicio_28
   {
     static void Main(string[] args)
     {
-      Console.Title = "Ejercicio 28";
+      //Console.Title = "Ejercicio 28";
 
       //Utilizar Diccionarios (Dictionary<string, int>)para realizar un contador de palabras, recorriendo el
       //texto palabra por palabra se deberá lograr que si se trata de una nueva palabra, se la agregará al
@@ -33,14 +33,13 @@ namespace Ejercicio_28
     {
       Texto.texto = texto;
       Dictionary<string, int> dic = new Dictionary<string, int>();
-      Dictionary<string, int> max = new Dictionary<string, int>();
       List<KeyValuePair<string, int>> list;
-      string key="";
       string maximo = "";
-      string prevMax = "";
-      int c = 0;
 
-      foreach (string palabra in texto.Split(' ', ',', '.'))
+      texto=texto.Replace(' ', ',');
+      texto=texto.Replace('.', ',');
+      texto = texto.Replace(",,", ",");
+      foreach (string palabra in texto.Split(','))        
       {
         if (!dic.ContainsKey(palabra))
         {
@@ -51,20 +50,35 @@ namespace Ejercicio_28
           dic[palabra]++;
         }
       }
-      
-      do{
-        key = dic.Max().Key;
-        if (key!=prevMax)
-        {
-          maximo += ($"Palabra: {key}, {dic[key]} veces - ");
-          //dic[key] = 0;
-        }     
-        c++;
-        prevMax = key;
-      } while (c<3);
-      
+
+      list = dic.ToList();
+      list.Sort(CompararKVP);
+
+      for (int i = 0; i < 3 && i<list.Count ; i++)
+      {
+        maximo += ($"Palabra: {list[i].Key}, {list[i].Value} veces\n");
+      }       
 
       return maximo;
+    }
+
+    public static int CompararKVP(KeyValuePair<string, int> k1, KeyValuePair<string, int> k2)
+    {
+      int rtn = 0;
+
+      if (k1.Value>k2.Value)
+      {
+        rtn = -1;
+      }
+      else
+      {
+        if (k2.Value > k1.Value)
+        {
+          rtn = 1;
+        }
+      }
+
+      return rtn;
     }
 
   }

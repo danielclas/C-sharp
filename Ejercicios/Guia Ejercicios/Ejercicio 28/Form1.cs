@@ -26,7 +26,6 @@ namespace Ejercicio_28
         {
             string maximo=Texto.CapturarTexto(textBox1.Text);
              textBox2.Text = maximo;
-
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
