@@ -55,9 +55,10 @@ namespace Ejercicio_23
             this.lblDolar = new System.Windows.Forms.Label();
             this.lblPeso = new System.Windows.Forms.Label();
             this.lblCotizacion = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnLockCotizacion = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             // 
             // txtCotizacionEuro
             // 
@@ -117,6 +118,7 @@ namespace Ejercicio_23
             this.btnConvertEuro.TabIndex = 15;
             this.btnConvertEuro.Text = "->";
             this.btnConvertEuro.UseVisualStyleBackColor = true;
+            this.btnConvertEuro.Click += new System.EventHandler(this.btnConvertEuro_Click);
             // 
             // btnConvertDolar
             // 
@@ -126,6 +128,7 @@ namespace Ejercicio_23
             this.btnConvertDolar.TabIndex = 16;
             this.btnConvertDolar.Text = "->";
             this.btnConvertDolar.UseVisualStyleBackColor = true;
+            this.btnConvertDolar.Click += new System.EventHandler(this.btnConvertDolar_Click);
             // 
             // btnConvertPeso
             // 
@@ -135,6 +138,7 @@ namespace Ejercicio_23
             this.btnConvertPeso.TabIndex = 17;
             this.btnConvertPeso.Text = "->";
             this.btnConvertPeso.UseVisualStyleBackColor = true;
+            this.btnConvertPeso.Click += new System.EventHandler(this.btnConvertPeso_Click);
             // 
             // txtDolarAEuro
             // 
@@ -271,17 +275,17 @@ namespace Ejercicio_23
             this.lblCotizacion.TabIndex = 32;
             this.lblCotizacion.Text = "Cotizacion";
             // 
-            // button1
+            // btnLockCotizacion
             // 
-            this.button1.ImageIndex = 0;
-            this.button1.ImageList = this.imageList1;
-            this.button1.Location = new System.Drawing.Point(183, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(50, 36);
-            this.button1.TabIndex = 33;
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnLockCotizacion.ImageIndex = 0;
+            this.btnLockCotizacion.ImageList = this.imageList1;
+            this.btnLockCotizacion.Location = new System.Drawing.Point(183, 12);
+            this.btnLockCotizacion.Name = "btnLockCotizacion";
+            this.btnLockCotizacion.Size = new System.Drawing.Size(50, 36);
+            this.btnLockCotizacion.TabIndex = 33;
+            this.btnLockCotizacion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnLockCotizacion.UseVisualStyleBackColor = true;
+            this.btnLockCotizacion.Click += new System.EventHandler(this.button1_Click);
             // 
             // imageList1
             // 
@@ -295,7 +299,7 @@ namespace Ejercicio_23
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(655, 188);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnLockCotizacion);
             this.Controls.Add(this.lblCotizacion);
             this.Controls.Add(this.lblPeso);
             this.Controls.Add(this.lblDolar);
@@ -356,7 +360,7 @@ namespace Ejercicio_23
     private System.Windows.Forms.Label lblDolar;
     private System.Windows.Forms.Label lblPeso;
     private System.Windows.Forms.Label lblCotizacion;
-    private System.Windows.Forms.Button button1;
+    private System.Windows.Forms.Button btnLockCotizacion;
     private System.Windows.Forms.ImageList imageList1;
   }
 }
