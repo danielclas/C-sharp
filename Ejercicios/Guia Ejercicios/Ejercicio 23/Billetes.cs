@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +9,7 @@ namespace Billetes
     public class Euro
     {
         private double cantidad;
-        private static double cotizRespecDolar = 1.16;
+        public static double cotizRespecDolar = 1.16;
 
         public Euro()
         {

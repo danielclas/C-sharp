@@ -58,7 +58,6 @@ namespace Ejercicio_23
             this.btnLockCotizacion = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             // 
             // txtCotizacionEuro
             // 
@@ -66,6 +65,7 @@ namespace Ejercicio_23
             this.txtCotizacionEuro.Name = "txtCotizacionEuro";
             this.txtCotizacionEuro.Size = new System.Drawing.Size(115, 20);
             this.txtCotizacionEuro.TabIndex = 0;
+            this.txtCotizacionEuro.Leave += new System.EventHandler(this.txtCotizacionEuro_Leave);
             // 
             // txtCotizacionDolar
             // 
@@ -80,6 +80,7 @@ namespace Ejercicio_23
             this.txtCotizacionPeso.Name = "txtCotizacionPeso";
             this.txtCotizacionPeso.Size = new System.Drawing.Size(115, 20);
             this.txtCotizacionPeso.TabIndex = 2;
+            this.txtCotizacionPeso.Leave += new System.EventHandler(this.txtCotizacionPeso_Leave);
             // 
             // txtEuro
             // 
@@ -325,6 +326,7 @@ namespace Ejercicio_23
             this.Controls.Add(this.txtCotizacionPeso);
             this.Controls.Add(this.txtCotizacionDolar);
             this.Controls.Add(this.txtCotizacionEuro);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.Text = "Ejercicio 23";
             this.Load += new System.EventHandler(this.Form1_Load);

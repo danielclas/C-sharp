@@ -31,6 +31,38 @@ namespace Ejercicio_23
 
     }
 
+    private void txtCotizacionEuro_Leave(object sender, System.EventArgs e)
+    {
+      if (txtEuro.Text != "")
+      {
+        double cotizacion = double.Parse(txtCotizacionEuro.Text);
+        Euro euro = new Euro(double.Parse(txtEuro.Text), cotizacion);
+
+        Peso peso = (Peso)euro;
+        Dolar dolar = (Dolar)euro;
+
+        txtEuroADolar.Text = dolar.GetCantidad().ToString();
+        txtEuroAPeso.Text = peso.GetCantidad().ToString();
+      }     
+      
+    }
+
+    private void txtCotizacionPeso_Leave(object sender, System.EventArgs e)
+    {
+      if (txtPeso.Text != "")
+      {
+        double cotizacion = double.Parse(txtCotizacionPeso.Text);
+        Peso peso = new Peso(double.Parse(txtPeso.Text), cotizacion);
+
+        Dolar dolar = (Dolar)peso;
+        Euro euro = (Euro)dolar;
+
+        txtPesoAEuro.Text = euro.GetCantidad().ToString();
+        txtPesoADolar.Text = dolar.GetCantidad().ToString();
+      }
+
+    }
+
     private void button1_Click(object sender, EventArgs e)
     {
             if (img == 0)
