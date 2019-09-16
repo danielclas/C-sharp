@@ -21,7 +21,7 @@ namespace Ejercicio_33
             int index, i = 0;
 
             Console.WriteLine("\nPara escribir un libro, copie y pegue un texto despues de los dos puntos debajo.");
-            Console.WriteLine("\nLa funcion EscribirLibro() indexara en la lista automaticamente cada palabras");
+            Console.WriteLine("\nLa funcion EscribirLibro() indexara en la lista automaticamente cada palabra");
             Console.WriteLine("\nLa funcion leer libro leera desde esos mismos indices con un espacio entre cada palabras");
 
             Console.WriteLine("\nEscribir libro: ");
@@ -32,7 +32,7 @@ namespace Ejercicio_33
 
             do
             {
-                Console.WriteLine($"\n\nIngrese un indice para agregar una palabra mayor a 0 y menor a {libro.Count()}: ");
+                Console.WriteLine($"\n---------------------\nIngrese un indice para agregar una palabra mayor a 0 y menor a {libro.Count()}: ");
                 Console.Write("\nIndice: ");
                 index = int.Parse(Console.ReadLine());
                 Console.Write("Palabra: ");
@@ -40,6 +40,8 @@ namespace Ejercicio_33
 
                 Console.WriteLine("\nLeer libro nuevamente: ");
                 libro.LeerLibro();
+
+                Console.WriteLine($"\nSe agrego la palabra: {libro[index]}(obtenida con indexador)");
 
                 i++;
 
