@@ -18,6 +18,7 @@ namespace Ejercicio_34
             this.puertas = puertas;
             this.color = color;
         }
+
         
         protected string Datos()
         {
