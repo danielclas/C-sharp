@@ -19,9 +19,8 @@ namespace Ejercicio_31
       this.numero = numero;
     }
 
-    public Cliente(int numero, string nombre)
+    public Cliente(int numero, string nombre):this(numero)
     {
-      this.numero = numero;
       Nombre = nombre;
     }
 

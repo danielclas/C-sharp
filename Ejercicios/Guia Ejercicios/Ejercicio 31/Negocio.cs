@@ -19,6 +19,7 @@ namespace Ejercicio_31
     {
       clientes = new Queue<Cliente>();
       nombre = "Caja 1";
+      caja = new PuestoAtencion(PuestoAtencion.Puesto.Caja1);
     }
 
     public Negocio(string nombre) : this()
@@ -53,7 +54,7 @@ namespace Ejercicio_31
 
       if (n != c)
       {
-        n.clientes.Enqueue(c);
+        n.Cliente = c;
         rtn = true;
       }
 

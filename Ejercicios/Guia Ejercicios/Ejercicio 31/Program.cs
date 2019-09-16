@@ -13,7 +13,6 @@ namespace Ejercicio_31
       Console.Title = "Ejercicio 31";
 
       Negocio n = new Negocio("Negocio 1");
-      PuestoAtencion p = new PuestoAtencion(PuestoAtencion.Puesto.Caja1);
       Cliente c1 = new Cliente(1, "Cliente 1");
       Cliente c2 = new Cliente(2, "Cliente 2");
       Cliente c3 = new Cliente(3, "Cliente 3");
@@ -52,11 +51,11 @@ namespace Ejercicio_31
 
       if (n+c1)
       {
-        Console.WriteLine("Pude sumar C1");
+        Console.WriteLine("Pudo sumar C1");
       }
       else
       {
-        Console.WriteLine("No pude sumar C1");
+        Console.WriteLine("No pudo sumar C1\n");
       }
 
       Console.WriteLine($"Clientes pendientes: {n.ClientesPendientes}");
@@ -77,6 +76,15 @@ namespace Ejercicio_31
       else
       {
         Console.WriteLine("No pudo atenderse al cliente");
+      }
+
+      if (~n)
+      {
+        Console.WriteLine($"Clientes pendientes: {n.ClientesPendientes}");
+      }
+      else
+      {
+         Console.WriteLine("No pudo atenderse al cliente");
       }
 
       Console.ReadKey();
