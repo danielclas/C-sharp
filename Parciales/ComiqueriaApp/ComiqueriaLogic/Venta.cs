@@ -47,7 +47,7 @@ namespace ComiqueriaLogic
         {
             producto.Stock -= cantidad;
             //Agrego thread para que los DateTime generados tengan diferente horario
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(3000);
             fecha = DateTime.Now;
             precioFinal = CalcularPrecioFinal(producto.Precio, cantidad);
         }

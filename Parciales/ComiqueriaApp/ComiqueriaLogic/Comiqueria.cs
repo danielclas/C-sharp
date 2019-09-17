@@ -49,7 +49,6 @@ namespace ComiqueriaLogic
             }
 
             return str.ToString();
-
         }       
 
         public Dictionary<Guid, string> ListarProductos()
@@ -62,8 +61,7 @@ namespace ComiqueriaLogic
                 {
                     dic.Add((Guid)p, p.Descripcion);
                 }
-            }
-            
+            }            
 
             return dic;
         }

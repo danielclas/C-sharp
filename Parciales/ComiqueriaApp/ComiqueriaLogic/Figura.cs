@@ -24,7 +24,7 @@ namespace ComiqueriaLogic
         {
             StringBuilder str = new StringBuilder(base.ToString());
 
-            str = str.Append($"Figura: {altura}cm");
+            str = str.Append($"\nFigura: {altura}cm");
 
             return str.ToString();
         }
