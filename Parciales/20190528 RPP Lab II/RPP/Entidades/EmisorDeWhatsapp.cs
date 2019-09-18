@@ -35,11 +35,11 @@ namespace Entidades
 
             if (emisor.numeroCargado)
             {
-                s.AppendLine($".{emisor.numeroTelefono}");
+                s.AppendLine($"\n.{emisor.numeroTelefono}");
             }
             else
             {
-                s.AppendLine($".No cargado");
+                s.AppendLine($"\n.No cargado");
             }
 
             return s.ToString();
@@ -47,7 +47,7 @@ namespace Entidades
 
         public override string EnviarMensaje()
         {
-            StringBuilder s = new StringBuilder(this.ToString());
+            StringBuilder s = new StringBuilder((string)this);
 
             if (numeroCargado)
             {                
@@ -55,7 +55,7 @@ namespace Entidades
             }
             else
             {
-                s.AppendLine("\nNo se pudo enviar el mensaje");
+                s.AppendLine(".No se pudo enviar el mensaje");
             }
 
             return s.ToString();

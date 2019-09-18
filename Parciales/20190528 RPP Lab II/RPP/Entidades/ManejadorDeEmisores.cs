@@ -22,20 +22,30 @@ namespace Entidades
         {
             //EnviarMensajes usa todos sus emisores para tratar de enviar los mensajes.Retorna las respuestas
             //de todos los mensajes junto con el nombre de la región.
-            StringBuilder s = new StringBuilder();            foreach (Emisor e in emisores)
+            StringBuilder s = new StringBuilder();
+
+            s.Append($"\nRegion {region}\n");
+            foreach (Emisor e in emisores)
             {
                 s.Append(e.EnviarMensaje());
-            }            return s.ToString();
+            }
+
+            return s.ToString();
+
         }
 
         public override string ToString()
         {
             //ToString retorna el nombre de la región y la información de todos los emisores (usar StringBuilder).
-            StringBuilder s = new StringBuilder();            s.Append($"Region {region}");            foreach (Emisor e in emisores)
+            StringBuilder s = new StringBuilder();
+
+            foreach (Emisor e in emisores)
             {
                 s.Append(e.ToString());
-                Console.WriteLine("HOLA");
-            }            return s.ToString();
+            }
+
+            return s.ToString();
+
         }
 
         public static bool operator ==(ManejadorDeEmisores manejador, Emisor emisor)
@@ -61,11 +71,16 @@ namespace Entidades
 
         public static bool operator +(ManejadorDeEmisores manejador, Emisor emisor)
         {
-            bool rtn = false;            if (manejador!=emisor)
+            bool rtn = false;
+
+            if (manejador!=emisor)
             {
                 manejador.emisores.Add(emisor);
                 rtn = true;
-            }            return rtn;
+            }
+
+            return rtn;
+
         }
 
         public static bool operator -(ManejadorDeEmisores manejador, Emisor emisor)

@@ -36,7 +36,7 @@ namespace Entidades
 
         public static explicit operator string(EmisorDeEmails emisor)
         {
-            return ($"Email: {emisor.email} Enviado: {emisor.enviado} {emisor.ToString()}");
+            return ($"{emisor.ToString()}\n.Email: {emisor.email}");
         }
     }
 }
