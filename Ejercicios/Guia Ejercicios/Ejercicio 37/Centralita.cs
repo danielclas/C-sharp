@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,51 +6,98 @@ using System.Threading.Tasks;
 
 namespace Ejercicio_37
 {
-    public class Centralita
+  public class Centralita
   {
-        private List<Llamada> listaDeLlamadas;
-        protected string razonSocial;
+    private List<Llamada> listaDeLlamadas;
+    protected string razonSocial;
 
-        public float GananciasPorLocal { get; }
-        public float GananciasPorProvincial { get;}
-        public float GananciasPorTotal { get { return CalcularGanancia(); } }
-        public List<Llamada> Llamadas { get;}
+    public float GananciasPorLocal { get { return CalcularGanancia(Llamada.TipoLlamada.Local); } }
+    public float GananciasPorProvincial { get { return CalcularGanancia(Llamada.TipoLlamada.Provincial); } }
+    public float GananciasPorTotal { get { return CalcularGanancia(Llamada.TipoLlamada.Todas); } }
+    public List<Llamada> Llamadas { get { return listaDeLlamadas; } }   
 
-        //l.CalcularGanancia será privado.Este método recibe un Enumerado TipoLlamada y retornará
-        //el valor de lo recaudado, según el criterio elegido(ganancias por las llamadas del tipo Local,
-        //Provincial o de Todas según corresponda).
-        //m.El método Mostrar expondrá la razón social, la ganancia total, ganancia por llamados locales
-        //y provinciales y el detalle de las llamadas realizadas.
-        //n.La lista sólo se inicializará en el constructor por defecto Centralita().
-        //o.Las propiedades GananciaPorTotal, GananciaPorLocal y GananciaPorProvincial retornarán el
-        //precio de lo facturado según el criterio.Dichos valores se calcularán en el método
-        //CalcularGanancia().
-
-        public Centralita()
-        {
-
-        }
-
-        public Centralita(string nombreEmpresa)
-        {
-
-        }
-
-        public string Mostrar()
-        {
-
-        }
-
-        public void OrdenarLlamadas()
-        {
-
-        }
-
-        private float CalcularGanancia(Llamada.TipoLlamada tipo)
-        {
-
-        }
-
-
+    public Centralita()
+    {
+      listaDeLlamadas = new List<Llamada>();
     }
+
+    public Centralita(string nombreEmpresa) : this()
+    {
+      razonSocial = nombreEmpresa;
+    }
+
+    public string Mostrar()
+    {
+      Local local;
+      Provincial provincial;
+      StringBuilder str = new StringBuilder(($"----------------------\n" +
+        $"Razon social: {razonSocial} Ganancia total: {GananciasPorTotal}\n"));
+      str.AppendLine($"Ganancias Local: {GananciasPorLocal} Ganancias Provincial: {GananciasPorProvincial}");
+
+      foreach (Llamada l in Llamadas)
+      {
+        if (l is Local)
+        {
+          local = (Local)l;
+          str.AppendLine(local.Mostrar());
+        }
+        else
+        {
+          provincial = (Provincial)l;
+          str.AppendLine(provincial.Mostrar());
+        }
+      }
+
+      return str.ToString();
+    }
+    
+    public void OrdenarLlamadas()
+    {
+        listaDeLlamadas.Sort(Llamada.OrdenarPorDuracion);
+    }
+
+    private float CalcularGanancia(Llamada.TipoLlamada tipo)
+    {
+      float acum = 0;
+      Local local;
+      Provincial provincial;
+
+      foreach (Llamada l in Llamadas)
+      {
+        if (tipo == Llamada.TipoLlamada.Todas)
+        {
+          if (l is Local)
+          {
+            local = (Local)l;
+            acum += local.CostoLlamada;
+          }
+          else
+          {
+            provincial = (Provincial)l;
+            acum += provincial.CostoLlamada;
+          }
+        }
+        else if (tipo == Llamada.TipoLlamada.Local)
+        {
+          if (l is Local)
+          {
+            local = (Local)l;
+            acum += local.CostoLlamada;
+          }          
+        }
+        else if (tipo == Llamada.TipoLlamada.Provincial)
+        {
+          if (l is Provincial)
+          {
+            provincial = (Provincial)l;
+            acum += provincial.CostoLlamada;
+          }          
+        }
+      }
+
+      return acum;
+    }
+
+
+  }
 }

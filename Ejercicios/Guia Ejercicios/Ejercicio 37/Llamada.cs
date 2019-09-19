@@ -36,7 +36,7 @@ namespace Ejercicio_37
       return str.ToString();
     }
 
-    public int OrdenarPorDuracion(Llamada llamada1, Llamada llamada2)
+    public static int OrdenarPorDuracion(Llamada llamada1, Llamada llamada2)
     {
       int rtn = 0;
 
