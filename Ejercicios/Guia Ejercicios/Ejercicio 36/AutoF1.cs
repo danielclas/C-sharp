@@ -10,7 +10,8 @@ namespace Ejercicio_36
     {
         private short caballosDeFuerza;
 
-        public short CaballosDeFuerza { get; set; }
+        public short CaballosDeFuerza { get { return caballosDeFuerza; } set { caballosDeFuerza = value; } }
+
         public AutoF1(short numero, string escuderia):base(numero, escuderia)
         {
 
@@ -23,7 +24,7 @@ namespace Ejercicio_36
 
         public string mostrarDatos()
         {
-            return ($"\nEscuderia: {escuderia}, nro: {numero}. Comb: {cantidadCombustible}. " + $"Vueltas restantes: {vueltasRestantes}. En competencia {enCompetencia}");
+            return ($"\n{base.MostrarDatos()} Caballos: {CaballosDeFuerza}");  
         }
 
         public static bool operator ==(AutoF1 a1, AutoF1 a2)
