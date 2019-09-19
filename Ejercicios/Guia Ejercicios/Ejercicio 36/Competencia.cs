@@ -33,7 +33,6 @@ namespace Ejercicio_36
     {
       bool rtn = false;
       Random random;
-      Console.WriteLine(c.competidores.Count);
 
       if (c.cantidadCompetidores > c.competidores.Count)
       {
