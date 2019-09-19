@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ejercicio_37
 {
-  class Llamada
+  public class Llamada
   {
     protected float duracion;
     protected string nroDestino;
