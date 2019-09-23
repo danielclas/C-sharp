@@ -45,9 +45,14 @@ namespace Ejercicio_40
 
         private void btnGenerarLlamada_Click(object sender, EventArgs e)
         {
-            Llamador llamador = new Llamador();
+            Llamador llamador = new Llamador(centralita);
             llamador.Show();
 
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }
