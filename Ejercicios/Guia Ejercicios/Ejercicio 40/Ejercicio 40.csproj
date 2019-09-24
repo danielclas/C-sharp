@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{F9E85382-AC38-473A-A3EB-9AF2FB3C5CF4}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>Ejercicio_40</RootNamespace>
     <AssemblyName>Ejercicio 40</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -31,9 +31,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,8 +47,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Central Telefonica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Central Telefonica.Designer.cs">
+      <DependentUpon>Central Telefonica.cs</DependentUpon>
+    </Compile>
     <Compile Include="Centralita.cs" />
+    <Compile Include="InformarFacturacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InformarFacturacion.Designer.cs">
+      <DependentUpon>InformarFacturacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Llamada.cs" />
+    <Compile Include="Llamador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Llamador.Designer.cs">
+      <DependentUpon>Llamador.cs</DependentUpon>
+    </Compile>
     <Compile Include="Local.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -51,6 +74,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Central Telefonica.resx">
+      <DependentUpon>Central Telefonica.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InformarFacturacion.resx">
+      <DependentUpon>InformarFacturacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Llamador.resx">
+      <DependentUpon>Llamador.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
