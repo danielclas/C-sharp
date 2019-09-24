@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VistaConsola", "Daniel.Clas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "Entidades\Entidades.csproj", "{7F53DF62-87F9-48F5-9321-8E035E71983B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VistaForm", "VistaForm\VistaForm.csproj", "{1FF1D32F-4D50-4212-9678-EE8618408342}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7F53DF62-87F9-48F5-9321-8E035E71983B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F53DF62-87F9-48F5-9321-8E035E71983B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F53DF62-87F9-48F5-9321-8E035E71983B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FF1D32F-4D50-4212-9678-EE8618408342}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FF1D32F-4D50-4212-9678-EE8618408342}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FF1D32F-4D50-4212-9678-EE8618408342}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FF1D32F-4D50-4212-9678-EE8618408342}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

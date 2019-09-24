@@ -10,23 +10,23 @@ namespace Entidades
     {
         private int añosExperiencia;
 
-        public int AñosExperiencia { get; set; }
+        public int AñosExperiencia { get { return añosExperiencia; } set { añosExperiencia = value; } }
 
         public DirectorTecnico(string nombre, string apellido, int edad, int dni, int añosExperiencia):base(nombre, apellido, edad, dni)
         {
             this.AñosExperiencia = añosExperiencia;
         }
 
-        public string Mostrar()
+        public override string Mostrar()
         {
-            StringBuilder str = new StringBuilder(base.Mostrar());
+            StringBuilder str = new StringBuilder($"\nDT: {base.Mostrar()}");
 
-            str.Append($"Años experiencia: {this.añosExperiencia}");
+            str.Append($" Años experiencia: {this.añosExperiencia}");
 
             return str.ToString();
         }
 
-        public bool ValidarAptitud()
+        public override bool ValidarAptitud()
         {
             return (this.Edad < 65 && this.añosExperiencia >= 2);
         }

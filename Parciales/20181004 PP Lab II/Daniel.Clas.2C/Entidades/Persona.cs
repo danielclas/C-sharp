@@ -29,7 +29,10 @@ namespace Entidades
 
         public Persona(string nombre, string apellido, int edad, int dni)
         {
-
+            this.nombre = nombre;
+            this.apellido = apellido;
+            this.edad = edad;
+            this.dni = dni;
         }
 
         public abstract bool ValidarAptitud();

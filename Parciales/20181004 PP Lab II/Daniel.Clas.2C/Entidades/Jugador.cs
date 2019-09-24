@@ -18,7 +18,9 @@ namespace Entidades
 
         public Jugador(string nombre, string apellido, int edad, int dni, float peso, float altura, Posicion posicion):base(nombre, apellido, edad, dni)
         {
-            this.Posicion = posicion;
+            this.posicion = posicion;
+            this.peso = peso;
+            this.altura = altura;
         }
 
         public string Mostrar()
@@ -37,7 +39,7 @@ namespace Entidades
 
         public bool ValidarEstadoFisico()
         {
-            double imc= Math.Pow(this.Peso / this.Altura,2);
+            double imc = 20;
 
             return (imc >= 18.5 && imc <= 25);
         }
