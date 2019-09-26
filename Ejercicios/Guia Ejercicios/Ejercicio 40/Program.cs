@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +11,7 @@ namespace Ejercicio_40
   {
     static void Main(string[] args)
     {
-            /*
+            
             // Mi central
             Centralita c = new Centralita("Fede Center");
             // Mis 4 llamadas
@@ -31,11 +31,11 @@ namespace Ejercicio_40
             Console.WriteLine(c.Mostrar());
             c.OrdenarLlamadas();
             Console.WriteLine(c.Mostrar());
-            Console.ReadKey();*/
+            Console.ReadKey();
 
-            Application.EnableVisualStyles();
+           /* Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Central_Telefonica());
+            Application.Run(new Central_Telefonica());*/
         }
   }
 }
