@@ -12,10 +12,10 @@ namespace EntidadFinanciera
         private List<Prestamo> listaDePrestamos;
         private string razonSocial;
 
-        public float InteresesEnDolares { get;}
-        public float InteresesEnPeso { get;}
-        public float InteresesTotales { get; }
-        public List<Prestamo> ListaDePrestamos { get;}
+        public float InteresesEnDolares { get { return this.CalcularInteresesGanados(Prestamo.TipoDePrestamo.Dolares); } }
+        public float InteresesEnPeso { get { return this.CalcularInteresesGanados(Prestamo.TipoDePrestamo.Pesos); } }
+        public float InteresesTotales { get { return this.CalcularInteresesGanados(Prestamo.TipoDePrestamo.Todos); } }
+        public List<Prestamo> ListaDePrestamos { get { return this.listaDePrestamos; } }
         public string RazonSocial { get { return this.razonSocial; } }
 
         private Financiera()
@@ -23,20 +23,54 @@ namespace EntidadFinanciera
             this.listaDePrestamos = new List<Prestamo>();
         }
 
-        public  Financiera(string razonSocial):this()
+        public Financiera(string razonSocial) : this()
         {
             this.razonSocial = razonSocial;
         }
 
         private float CalcularInteresesGanados(Prestamo.TipoDePrestamo tipoPrestamo)
         {
+            float acum = 0;
+            PrestamoDolar pDolar;
+            PrestamoPesos pPeso;
 
+            foreach (Prestamo p in this.ListaDePrestamos)
+            {
+                switch (tipoPrestamo)
+                {
+                    case Prestamo.TipoDePrestamo.Pesos:
+                        if(p is PrestamoPesos)
+                        {
+                            pPeso = (PrestamoPesos)p;
+                            acum += pPeso.Interes;
+                        }
+                        break;
+                    case Prestamo.TipoDePrestamo.Dolares:
+                        if (p is PrestamoDolar)
+                        {
+                            pDolar = (PrestamoDolar)p;
+                            acum += pDolar.Interes;
+                        }
+                        break;
+                    case Prestamo.TipoDePrestamo.Todos:
+                        if (p is PrestamoPesos)
+                        {
+                            pPeso = (PrestamoPesos)p;
+                            acum += pPeso.Interes;
+                        }
+                        else
+                        {
+                            pDolar = (PrestamoDolar)p;
+                            acum += pDolar.Interes;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return acum;
         }
-
-        //e.CalcularInteresGanado: Método privado que recibe un Enumerado de tipo TipoDePrestamo y
-        //retornará el valor equivalente a la suma de intereses entre todos los préstamos(invocar a la
-        //propiedad Interes de la clase PrestamoPesos o PrestamoDolar según el tipo de préstamo
-        //evaluado)
 
         public static string Mostrar(Financiera financiera)
         {
@@ -45,7 +79,7 @@ namespace EntidadFinanciera
 
         public void OrdenarPrestamos()
         {
-            this.listaDePrestamos.Sort(Prestamo.OrdenarPorFecha);
+            this.ListaDePrestamos.Sort(Prestamo.OrdenarPorFecha);
         }
 
         public static explicit operator string(Financiera financiera)
@@ -55,7 +89,7 @@ namespace EntidadFinanciera
             str.AppendLine($"Intereses totales: {financiera.InteresesTotales} Pesos: {financiera.InteresesEnPeso} Dolares: {financiera.InteresesEnDolares}");
 
             financiera.OrdenarPrestamos();
-            financiera.listaDePrestamos.ForEach(k => str.AppendLine(k.Mostrar()));
+            financiera.ListaDePrestamos.ForEach(k => str.AppendLine(k.Mostrar()));
 
             return str.ToString();
 
@@ -63,17 +97,22 @@ namespace EntidadFinanciera
 
         public static bool operator !=(Financiera financiera, Prestamo prestamo)
         {
-
+            return !(financiera == prestamo);
         }
 
         public static bool operator ==(Financiera financiera, Prestamo prestamo)
         {
-
+            return financiera.ListaDePrestamos.Contains(prestamo);
         }
 
         public static Financiera operator +(Financiera financiera, Prestamo prestamoNuevo)
         {
+            if (financiera != prestamoNuevo)
+            {
+                financiera.ListaDePrestamos.Add(prestamoNuevo);
+            }
 
+            return financiera;
         }
 
 

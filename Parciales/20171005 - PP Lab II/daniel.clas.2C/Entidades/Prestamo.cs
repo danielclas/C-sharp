@@ -34,7 +34,7 @@ namespace PrestamosPersonales
 
         public virtual string Mostrar()
         {
-            return ($"Monto: ${this.monto} Vencimiento: {this.Vencimiento}");
+            return ($"\nMonto: ${this.monto} Vencimiento: {this.Vencimiento}");
         }
 
         public static int OrdenarPorFecha(Prestamo p1, Prestamo p2)
