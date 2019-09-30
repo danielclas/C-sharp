@@ -14,15 +14,15 @@ namespace Test
         static void Main(string[] args)
         {
             Financiera financiera = new Financiera("Mi Financiera");
-            PrestamoDolar pd1 = new PrestamoDolar(1500, new DateTime(2017, 11, 01),
+            PrestamoDolar pd1 = new PrestamoDolar(1500, new DateTime(2020, 11, 01),
             Prestamo.PeriodicidadDePagos.Mensual);
-            PrestamoDolar pd2 = new PrestamoDolar(2000, new DateTime(2017, 12, 05),
+            PrestamoDolar pd2 = new PrestamoDolar(2000, new DateTime(2020, 12, 05),
             Prestamo.PeriodicidadDePagos.Bimestral);
             PrestamoDolar pd3 = new PrestamoDolar(2500, new DateTime(2018, 01, 01),
             Prestamo.PeriodicidadDePagos.Trimestral);
-            PrestamoPesos pp1 = new PrestamoPesos(8000, new DateTime(2018, 01, 01), 20);
+            PrestamoPesos pp1 = new PrestamoPesos(8000, new DateTime(2020, 01, 01), 20);
             PrestamoPesos pp2 = new PrestamoPesos(7000, new DateTime(2001, 10, 01), 25);
-            PrestamoPesos pp3 = new PrestamoPesos(5000, new DateTime(2017, 11, 20), 20);
+            PrestamoPesos pp3 = new PrestamoPesos(5000, new DateTime(2020, 11, 20), 20);
 
             financiera = financiera + pd1;
             financiera = financiera + pd2;
