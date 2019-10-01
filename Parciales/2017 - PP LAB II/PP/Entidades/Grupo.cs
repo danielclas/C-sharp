@@ -33,18 +33,8 @@ namespace Entidades
         public static implicit operator string(Grupo e)
         {
             StringBuilder str = new StringBuilder($"**{e.nombre} {e.tipo.ToString()}**\nIntegrantes:\n");
-
-            foreach (Mascota m in e.manada)
-            {
-                if (m is Perro)
-                {
-                    str.AppendLine(((Perro)m).ToString());
-                }
-                else
-                {
-                    str.AppendLine(((Gato)m).ToString());
-                }
-            }
+            
+            e.manada.ForEach(k => str.AppendLine(k.ToString()));
 
             return str.ToString();
         }
