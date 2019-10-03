@@ -88,6 +88,22 @@ namespace ComiqueriaApp
             {
                 this.richTextBoxVentas.Text = this.comiqueria.ListarVentas();
             }
+
+
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            ModificarProductoForm modificarForm = new ModificarProductoForm(this.productoSeleccionado, this);
+            modificarForm.Show();
+        }
+
+        public void ActualizarLista()
+        {
+            this.listaProductos = this.comiqueria.ListarProductos();
+            Guid codigoProducto = ((KeyValuePair<Guid, string>)this.listBoxProductos.SelectedItem).Key;
+            this.productoSeleccionado = this.comiqueria[codigoProducto];
+            this.richTextBoxDetalle.Text = this.productoSeleccionado.ToString();
         }
     }
 }

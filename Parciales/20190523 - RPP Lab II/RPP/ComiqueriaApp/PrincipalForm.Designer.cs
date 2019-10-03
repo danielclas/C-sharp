@@ -35,6 +35,7 @@
             this.richTextBoxDetalle = new System.Windows.Forms.RichTextBox();
             this.lblVentas = new System.Windows.Forms.Label();
             this.lblProductos = new System.Windows.Forms.Label();
+            this.btnModificar = new System.Windows.Forms.Button();
             this.groupBoxAcciones.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,45 +45,53 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listBoxProductos.FormattingEnabled = true;
-            this.listBoxProductos.Location = new System.Drawing.Point(13, 43);
+            this.listBoxProductos.ItemHeight = 20;
+            this.listBoxProductos.Location = new System.Drawing.Point(20, 66);
+            this.listBoxProductos.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.listBoxProductos.Name = "listBoxProductos";
-            this.listBoxProductos.Size = new System.Drawing.Size(426, 225);
+            this.listBoxProductos.Size = new System.Drawing.Size(637, 344);
             this.listBoxProductos.TabIndex = 0;
             this.listBoxProductos.SelectedIndexChanged += new System.EventHandler(this.ListBoxProductos_SelectedIndexChanged);
             // 
             // richTextBoxVentas
             // 
-            this.richTextBoxVentas.Location = new System.Drawing.Point(13, 290);
+            this.richTextBoxVentas.Location = new System.Drawing.Point(20, 446);
+            this.richTextBoxVentas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.richTextBoxVentas.Name = "richTextBoxVentas";
-            this.richTextBoxVentas.Size = new System.Drawing.Size(746, 128);
+            this.richTextBoxVentas.Size = new System.Drawing.Size(1117, 195);
             this.richTextBoxVentas.TabIndex = 1;
             this.richTextBoxVentas.Text = "";
             // 
             // groupBoxAcciones
             // 
+            this.groupBoxAcciones.Controls.Add(this.btnModificar);
             this.groupBoxAcciones.Controls.Add(this.btnVender);
-            this.groupBoxAcciones.Location = new System.Drawing.Point(448, 30);
+            this.groupBoxAcciones.Location = new System.Drawing.Point(672, 46);
+            this.groupBoxAcciones.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBoxAcciones.Name = "groupBoxAcciones";
-            this.groupBoxAcciones.Size = new System.Drawing.Size(311, 97);
+            this.groupBoxAcciones.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBoxAcciones.Size = new System.Drawing.Size(466, 149);
             this.groupBoxAcciones.TabIndex = 2;
             this.groupBoxAcciones.TabStop = false;
             this.groupBoxAcciones.Text = "Acciones";
             // 
             // btnVender
             // 
-            this.btnVender.Location = new System.Drawing.Point(20, 34);
+            this.btnVender.Location = new System.Drawing.Point(30, 52);
+            this.btnVender.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnVender.Name = "btnVender";
-            this.btnVender.Size = new System.Drawing.Size(75, 23);
+            this.btnVender.Size = new System.Drawing.Size(112, 35);
             this.btnVender.TabIndex = 0;
             this.btnVender.Text = "Vender";
             this.btnVender.UseVisualStyleBackColor = true;
-            this.btnVender.Click += this.OnVenderClick;
+            this.btnVender.Click += new System.EventHandler(this.OnVenderClick);
             // 
             // richTextBoxDetalle
             // 
-            this.richTextBoxDetalle.Location = new System.Drawing.Point(448, 133);
+            this.richTextBoxDetalle.Location = new System.Drawing.Point(672, 205);
+            this.richTextBoxDetalle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.richTextBoxDetalle.Name = "richTextBoxDetalle";
-            this.richTextBoxDetalle.Size = new System.Drawing.Size(311, 135);
+            this.richTextBoxDetalle.Size = new System.Drawing.Size(464, 206);
             this.richTextBoxDetalle.TabIndex = 3;
             this.richTextBoxDetalle.Text = "";
             // 
@@ -90,9 +99,10 @@
             // 
             this.lblVentas.AutoSize = true;
             this.lblVentas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVentas.Location = new System.Drawing.Point(12, 274);
+            this.lblVentas.Location = new System.Drawing.Point(18, 422);
+            this.lblVentas.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVentas.Name = "lblVentas";
-            this.lblVentas.Size = new System.Drawing.Size(103, 13);
+            this.lblVentas.Size = new System.Drawing.Size(153, 20);
             this.lblVentas.TabIndex = 4;
             this.lblVentas.Text = "Lista de Ventas: ";
             // 
@@ -100,17 +110,28 @@
             // 
             this.lblProductos.AutoSize = true;
             this.lblProductos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProductos.Location = new System.Drawing.Point(12, 27);
+            this.lblProductos.Location = new System.Drawing.Point(18, 42);
+            this.lblProductos.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblProductos.Name = "lblProductos";
-            this.lblProductos.Size = new System.Drawing.Size(117, 13);
+            this.lblProductos.Size = new System.Drawing.Size(174, 20);
             this.lblProductos.TabIndex = 5;
             this.lblProductos.Text = "Lista de Productos:";
             // 
+            // btnModificar
+            // 
+            this.btnModificar.Location = new System.Drawing.Point(164, 52);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(124, 34);
+            this.btnModificar.TabIndex = 1;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
             // PrincipalForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(771, 430);
+            this.ClientSize = new System.Drawing.Size(1156, 662);
             this.Controls.Add(this.lblProductos);
             this.Controls.Add(this.lblVentas);
             this.Controls.Add(this.richTextBoxDetalle);
@@ -118,6 +139,7 @@
             this.Controls.Add(this.richTextBoxVentas);
             this.Controls.Add(this.listBoxProductos);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PrincipalForm";
@@ -138,5 +160,6 @@
         private System.Windows.Forms.RichTextBox richTextBoxDetalle;
         private System.Windows.Forms.Label lblVentas;
         private System.Windows.Forms.Label lblProductos;
+        private System.Windows.Forms.Button btnModificar;
     }
 }

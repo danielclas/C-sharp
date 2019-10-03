@@ -12,7 +12,7 @@ namespace ComiqueriaLogic
         private static Stack<Comprobante> comprobantes;
         private List<Producto> productos;
         private List<Venta> ventas;
-        
+
         public List<Comprobante> this[Producto producto, bool ordenar]
         {
             get
@@ -21,7 +21,7 @@ namespace ComiqueriaLogic
 
                 foreach (Comprobante c in Comiqueria.comprobantes)
                 {
-                    if (((Producto)c.Venta)==producto)
+                    if (((Producto)c.Venta) == producto)
                     {
                         lista.Add(c);
                     }
@@ -29,7 +29,7 @@ namespace ComiqueriaLogic
 
                 if (ordenar)
                 {
-                    lista.Sort((j,k)=>j.Venta.Fecha.CompareTo(k.Venta.Fecha));
+                    lista.Sort((j, k) => j.Venta.Fecha.CompareTo(k.Venta.Fecha));
                 }
 
                 return lista;
@@ -58,7 +58,7 @@ namespace ComiqueriaLogic
         {
             bool rtn = false;
 
-            if (this!=comprobante)
+            if (this != comprobante)
             {
                 Comiqueria.comprobantes.Push(comprobante);
                 rtn = true;
@@ -91,10 +91,7 @@ namespace ComiqueriaLogic
             ventas.Sort((v1, v2) => v1.Fecha.CompareTo(v2.Fecha));
             ventas.Reverse();
 
-            foreach (Venta v in ventas)
-            {
-                str.AppendLine(v.ObtenerDescripcion());
-            }
+            ventas.ForEach(v => str.AppendLine(v.ObtenerDescripcion()));
 
             return str.ToString();
         }
@@ -131,7 +128,7 @@ namespace ComiqueriaLogic
 
             foreach (Comprobante c in Comiqueria.comprobantes)
             {
-                if (c==comprobante)
+                if (c == comprobante)
                 {
                     rtn = true;
                     break;
