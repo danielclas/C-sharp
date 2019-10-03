@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ComiqueriaLogic;
 
 namespace ComprobantesLogic
 {
@@ -46,7 +47,8 @@ namespace ComprobantesLogic
 
       comprobante.AppendLine($"\nFecha emision: {this.fechaEmision}\nFecha vencimiento: {this.fechaVencimiento}\n");
       comprobante.AppendLine($"Producto: {p.Descripcion}\nCantidad:{base.Venta.Cantidad}\nPrecio unitario: ${p.Precio:0.00}");
-      comprobante.AppendLine($"Subtotal: ${p.Precio}\nImporte IVA: ${Venta.CalcularPrecioFinal(p.Precio,base.Venta.Cantidad)-p.Precio}\nImporte total:{Venta.CalcularPrecioFinal(p.Precio, base.Venta.Cantidad)}");
+      comprobante.AppendLine($"Subtotal: ${p.Precio}\nImporte IVA: ${Venta.CalcularPrecioFinal(p.Precio,base.Venta.Cantidad)-p.Precio}");
+      comprobante.AppendLine($"Importe total:{Venta.CalcularPrecioFinal(p.Precio, base.Venta.Cantidad)}");
 
       return comprobante.ToString();
     }
