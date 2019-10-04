@@ -14,15 +14,13 @@ namespace ComiqueriaApp
     public partial class ModificarProductoForm : Form
     {
         Producto producto;
-        PrincipalForm principalForm;
-        public ModificarProductoForm(Producto producto, PrincipalForm principalForm)
+        public ModificarProductoForm(Producto producto)
         {
             InitializeComponent();
             this.producto = producto;
             lblDescripcion.Text = producto.Descripcion;
             txtPrecioActual.Text = ($"{producto.Precio:0.00}");
             txtPrecioActual.ReadOnly = true;
-            this.principalForm = principalForm;
         }
 
         private void ModificarProductoForm_Load(object sender, EventArgs e)
@@ -53,7 +51,6 @@ namespace ComiqueriaApp
                     producto.Precio = precio;
                     txtNuevoPrecio.Text = "";
                     txtPrecioActual.Text = ($"{producto.Precio:0.00}");
-                    this.principalForm.ActualizarLista();
                 }
             }
             else

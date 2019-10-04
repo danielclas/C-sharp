@@ -94,7 +94,7 @@ namespace ComiqueriaApp
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            ModificarProductoForm modificarForm = new ModificarProductoForm(this.productoSeleccionado, this);
+            ModificarProductoForm modificarForm = new ModificarProductoForm(this.productoSeleccionado);
             modificarForm.Show();
         }
 
