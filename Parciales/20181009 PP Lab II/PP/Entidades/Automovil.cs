@@ -9,36 +9,46 @@ namespace Entidades
     public class Automovil:Vehiculo
     {
         private ConsoleColor color;
-        private int valorHora;
+        static private int valorHora;
 
-        private Automovil()
+        static Automovil()
         {
-
+            Automovil.valorHora = 50;
         }
 
-        public Automovil(string patente, ConsoleColor color)
+        public Automovil(string patente, ConsoleColor color):base(patente)
         {
-
+            this.color = color;
         }
 
-        public Automovil(string patente, ConsoleColor color, int valorHora)
+        public Automovil(string patente, ConsoleColor color, int valorHora):this(patente, color)
         {
-
+            Automovil.valorHora = valorHora;
         }
 
-        public string ConsultarDatos()
+        public override string ConsultarDatos()
         {
-
+            return ($"{base.ToString()} Color: {this.color} ${Automovil.valorHora}/hora");
         }
 
         public override bool Equals(object obj)
         {
-            return base.Equals(obj);
+            bool equals = false;
+
+            if (obj is Automovil)
+            {
+                equals = ((Automovil)obj).Patente == this.Patente;
+            }
+            return equals;
         }
 
-        public string ImprimitTicket()
+        public override string ImprimirTicket()
         {
+            double hours = (DateTime.Now - base.ingreso).Hours;
 
+            hours *= Automovil.valorHora;
+
+            return ($"{base.ImprimirTicket()} Costo: ${hours}");
         }
 
     }

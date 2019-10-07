@@ -10,41 +10,52 @@ namespace Entidades
     {
         private int cilindrada;
         private short ruedas;
-        private int valorHora;
+        private static int valorHora;
 
-        public string ConsultarDatos()
+        public override string ConsultarDatos()
         {
-
+            return ($"{base.ToString()} {this.ruedas} ruedas, CC: {this.cilindrada}. ${Moto.valorHora}/hora");
         }
 
         public override bool Equals(object obj)
         {
-            return base.Equals(obj);
+            bool equals = false;
+
+            if (obj is Moto)
+            {
+                equals = ((Moto)obj).Patente == this.Patente;
+            }
+            return equals;
         }
 
-        public string ImprimirTicket()
+        public override string ImprimirTicket()
         {
+            double hours = (DateTime.Now - base.ingreso).Hours;
 
+            hours *= Moto.valorHora;
+
+            return ($"{base.ImprimirTicket()} Costo: ${hours}");
         }
 
-        private Moto()
+        static Moto()
         {
-
+            Moto.valorHora = 30;
         }
 
-        public Moto(string patente, int cilindrada)
+        public Moto(string patente, int cilindrada):base(patente)
         {
-
+            this.ruedas = 2;
+            this.cilindrada = cilindrada;
         }
 
-        public Moto(string patente, int cilindrada, short ruedas)
+        public Moto(string patente, int cilindrada, short ruedas):this(patente, cilindrada)
         {
-
+            this.ruedas = ruedas;
         }
 
-        public Moto(string patente, int cilindrada, short ruedas, int valorHora)
+        public Moto(string patente, int cilindrada, short ruedas, int valorHora):this(patente, cilindrada, ruedas)
         {
-
+            Moto.valorHora = valorHora;
         }
     }
 }

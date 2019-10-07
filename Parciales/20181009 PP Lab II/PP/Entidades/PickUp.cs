@@ -5,40 +5,50 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Entidades
-{
+{ 
     public class PickUp:Vehiculo
     {
         private string modelo;
-        private int valorHora;
+        private static int valorHora;
 
-        public string ConsultarDatos()
+        public override string ConsultarDatos()
         {
-
+            return ($"{base.ToString()} Modelo: {this.modelo} ${PickUp.valorHora}/hora");
         }
 
         public override bool Equals(object obj)
         {
-            return base.Equals(obj);
+            bool equals = false;
+
+            if (obj is PickUp)
+            {
+                equals = ((PickUp)obj).Patente == this.Patente;
+            }
+            return equals;
         }
 
-        public string ImprimirTicket()
+        public override string ImprimirTicket()
         {
+            double hours = (DateTime.Now - base.ingreso).Hours;
 
+            hours *= PickUp.valorHora;
+
+            return ($"{base.ImprimirTicket()} Costo: ${hours}");
         }
 
-        private PickUp()
+        static PickUp()
         {
-
+            PickUp.valorHora = 70;
         }
 
-        public PickUp(string patente, string modelo)
+        public PickUp(string patente, string modelo):base(patente)
         {
-
+            this.modelo = modelo;
         }
 
-        public PickUp(string patente, string modelo, int valorHora)
+        public PickUp(string patente, string modelo, int valorHora):this(patente, modelo)
         {
-
+            PickUp.valorHora = valorHora;
         }
 
 
