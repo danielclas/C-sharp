@@ -57,9 +57,9 @@ namespace Entidades
     {
       int medida2;
 
-      if (Agua.MEDIDA <= this.Contenido)
+      if (medida <= this.Contenido)
       {
-        medida2 = Agua.MEDIDA;
+        medida2 = medida;
       }
       else
       {
