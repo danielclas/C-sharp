@@ -19,13 +19,16 @@ namespace FileReader
 
             DateTime date;
             int year, month, day, hour, minute, seconds, fraction, length;
-            string time, fileName;
+            string time, fileName, spaces;
             List<string> newLines = new List<string>();
             List<string> dates = new List<string>();            
 
             foreach (string line in lines)
             {
-                newLines.Add(line.Substring(6, 23));
+                if (line.Length>6)
+                {
+                    newLines.Add(line.Substring(6, 23));
+                }
             }
 
             foreach (string newLine in newLines)
@@ -45,8 +48,10 @@ namespace FileReader
                 //Used for AM or PM
                 time = String.Format("{0:H:mm t}m", date);
                 time = time.ToUpper();
-                
-                dates.Add(String.Format("{0:M/d/y} {1} ", date, time));
+
+                spaces = time.Length == 7 ? "  ":" ";
+
+                dates.Add(String.Format("{0:M/d/y} {1}{2}  ", date, time, spaces));
                 //Character count: 19
             }
 
@@ -57,12 +62,25 @@ namespace FileReader
             {
                 StringBuilder str = new StringBuilder(lines[i]);
                 str.Insert(6, dates[i]);
-                str.Remove(6+length, 23);
+                str.Remove(6+length, 24);
                 newLines.Add(str.ToString());
             }
 
             fileName = String.Format("Feedback for {0:M d y}", DateTime.Now);            
             File.WriteAllLines($"C:\\Users\\daniel.julio.clas\\Desktop\\{fileName}.txt", newLines);
+
+            if (lines.Length==newLines.Count && newLines.Count==dates.Count)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Archivo leido y creado correctamente");
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("El archivo no pudo ser leido correctamente");
+            }
+            
+            Console.ReadLine();
         }
     }
 }
