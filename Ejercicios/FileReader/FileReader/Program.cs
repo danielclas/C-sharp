@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +11,7 @@ namespace FileReader
     {
         static void Main(string[] args)
         {
-            //2019-10-15 13:27:23.160
+            //Format: 2019-10-15 13:27:23.160
             //Character count: 23
 
             string path = "C:\\Users\\daniel.julio.clas\\Desktop\\text.txt";
@@ -52,6 +52,7 @@ namespace FileReader
                 spaces = time.Length == 7 ? "  ":" ";
 
                 dates.Add(String.Format("{0:M/d/y} {1}{2}  ", date, time, spaces));
+                //Format: 10/15/19 8:19 PM
                 //Character count: 19
             }
 
@@ -72,12 +73,12 @@ namespace FileReader
             if (lines.Length==newLines.Count && newLines.Count==dates.Count)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Archivo leido y creado correctamente");
+                Console.WriteLine("\nArchivo leido y creado correctamente");
             }
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("El archivo no pudo ser leido correctamente");
+                Console.WriteLine("\nEl archivo no pudo ser leido correctamente");
             }
             
             Console.ReadLine();
