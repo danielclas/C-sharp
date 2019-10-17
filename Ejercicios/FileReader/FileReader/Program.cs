@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
+using OfficeOpenXml;
 
 namespace FileReader
 {
@@ -45,8 +46,7 @@ namespace FileReader
 
                 //After the 5 hours have been substracted, checks whether it's in the desired timeframe              
                 dateString = DateParser.ContainedInTimeframe(date) ? DateParser.FormatString(date): String.Empty;
-                dates.Add(dateString);
-                
+                dates.Add(dateString);                
             }
 
             //newLines is reused to write to clipboard
