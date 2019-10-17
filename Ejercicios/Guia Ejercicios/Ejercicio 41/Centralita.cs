@@ -38,12 +38,12 @@ namespace Ejercicio_41
         if (l is Local)
         {
           local = (Local)l;
-          str.AppendLine(local.Mostrar());
+          str.AppendLine(local.ToString());
         }
         else
         {
           provincial = (Provincial)l;
-          str.AppendLine(provincial.Mostrar());
+          str.AppendLine(provincial.ToString());
         }
       }
 

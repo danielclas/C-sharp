@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +13,11 @@ namespace FileReader
         [STAThread]
         static void Main(string[] args)
         {
+<<<<<<< HEAD
             //Original format: 2019-10-15 13:27:23.160
+=======
+            //Format: 2019-10-15 13:27:23.160
+>>>>>>> 516764f0ca087541be668b9fdb5baea9724e7e73
             //Character count: 23
 
             string[] clipboardLines = Clipboard.GetText().Split('\n');
@@ -72,6 +76,7 @@ namespace FileReader
 
                     spaces = time.Length == 7 ? "  " : " ";
 
+<<<<<<< HEAD
                     dateString = String.Format("{0:M/d/y} {1}{2}\t", date, time, spaces);
                 }
                 else
@@ -80,6 +85,10 @@ namespace FileReader
                 }
                 
                 dates.Add(dateString);
+=======
+                dates.Add(String.Format("{0:M/d/y} {1}{2}  ", date, time, spaces));
+                //Format: 10/15/19 8:19 PM
+>>>>>>> 516764f0ca087541be668b9fdb5baea9724e7e73
                 //Character count: 19
             }
 
@@ -104,11 +113,23 @@ namespace FileReader
             fileName = ($"C:\\Users\\Public\\Documents\\{fileName}.xlsx");
             File.Copy("C:\\Users\\Public\\Documents\\template.xlsx", fileName);
 
+<<<<<<< HEAD
             StringBuilder clipboard = new StringBuilder();
 
             foreach (string line in newLines)
             {
                 clipboard.Append(line);               
+=======
+            if (lines.Length==newLines.Count && newLines.Count==dates.Count)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\nArchivo leido y creado correctamente");
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nEl archivo no pudo ser leido correctamente");
+>>>>>>> 516764f0ca087541be668b9fdb5baea9724e7e73
             }
 
             Clipboard.SetText(clipboard.ToString());
