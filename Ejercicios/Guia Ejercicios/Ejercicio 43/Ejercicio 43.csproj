@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2DFAB0A0-FE9F-4C15-9844-C12E02483D98}</ProjectGuid>
+    <ProjectGuid>{FC87E7E3-D919-4FB1-A9D1-026F16E9A678}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Ejercicio_37</RootNamespace>
-    <AssemblyName>Ejercicio 37</AssemblyName>
+    <RootNamespace>Ejercicio_43</RootNamespace>
+    <AssemblyName>Ejercicio 43</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,16 +42,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Centralita.cs" />
-    <Compile Include="Llamada.cs" />
-    <Compile Include="Local.cs" />
+    <Compile Include="AutoF1.cs" />
+    <Compile Include="Competencia.cs" />
+    <Compile Include="CompetenciaNoDisponibleException.cs" />
+    <Compile Include="Motocross.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Provincial.cs" />
+    <Compile Include="VehiculoDeCarrera.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

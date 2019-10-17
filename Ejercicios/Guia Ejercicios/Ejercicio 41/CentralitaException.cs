@@ -6,27 +6,24 @@ using System.Threading.Tasks;
 
 namespace Ejercicio_41
 {
-      //b.En el operador + de Centralita, lanzar la excepción CentralitaExcepction en el caso de que la
-      //llamada se encuentre registrada en el sistema.
-      //c.Capturar dicha excepción tanto en la versión para Consola como en la de Formularios y
-      //mostrar el mensaje de forma “amigable” al usuario.
-
     class CentralitaException:Exception
     {
         private string nombreClase;
         private string nombreMetodo;
 
-        public string NombreClase { get;}
-        public string NombreMetodo { get; }
+        public string NombreClase { get { return this.nombreClase; } }
+        public string NombreMetodo { get { return this.nombreMetodo; } }
 
-        public CentralitaException(string mensaje, string clase, string metodo)
+        public CentralitaException(string mensaje, string clase, string metodo):base(mensaje)
         {
-
+            this.nombreClase = clase;
+            this.nombreMetodo = metodo;
         }
 
-        public CentralitaException(string mensaje, string clase, string metodo, Exception innerException)
+        public CentralitaException(string mensaje, string clase, string metodo, Exception innerException):base(mensaje, innerException)
         {
-
-        }
+          this.nombreClase = clase;
+          this.nombreMetodo = metodo;
+         }
     }
 }

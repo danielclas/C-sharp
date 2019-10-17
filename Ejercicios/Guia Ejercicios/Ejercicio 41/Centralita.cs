@@ -16,6 +16,51 @@ namespace Ejercicio_41
     public float GananciasPorTotal { get { return CalcularGanancia(Llamada.TipoLlamada.Todas); } }
     public List<Llamada> Llamadas { get { return listaDeLlamadas; } }   
 
+    private void AgregarLlamada(Llamada nuevaLlamada)
+    {
+      this.Llamadas.Add(nuevaLlamada);
+    }
+
+    public override string ToString()
+    {
+      return this.Mostrar();
+    }
+
+    public static bool operator !=(Centralita c, Llamada llamada)
+    {
+      return !(c == llamada);
+    }
+
+    public static bool operator ==(Centralita c, Llamada llamada)
+    {
+      bool rtnVal = false;
+
+      foreach (Llamada l in c.Llamadas)
+      {
+        if (l==llamada)
+        {
+          rtnVal = true;
+          break;
+        }
+      }
+
+      return rtnVal;
+    }
+
+    public static Centralita operator +(Centralita c, Llamada nuevaLlamada)
+    {
+      if (c!=nuevaLlamada)
+      {
+        c.AgregarLlamada(nuevaLlamada);
+      }
+      else
+      {
+        throw new CentralitaException("La llamada ya existe", "Llamador", "Operador +");
+      }
+
+      return c;
+    }
+
     public Centralita()
     {
       listaDeLlamadas = new List<Llamada>();

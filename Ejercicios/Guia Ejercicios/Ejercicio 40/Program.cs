@@ -32,8 +32,7 @@ namespace Ejercicio_40
             //c.OrdenarLlamadas();
             //Console.WriteLine(c.Mostrar());
             //Console.ReadKey();
-
-             Application.EnableVisualStyles();
+            Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Central_Telefonica());
         }
