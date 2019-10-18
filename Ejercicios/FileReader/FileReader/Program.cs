@@ -80,50 +80,38 @@ namespace FileReader
                 cellData.Add(line.Split('\t'));
             }
 
-            using (ExcelPackage excel = new ExcelPackage(new FileInfo(fileName), new FileInfo(template)))
+            using (ExcelPackage excel = new ExcelPackage())
             {
-                //excel.Workbook.Worksheets.Add("Worksheet1");
+                excel.Workbook.Worksheets.Add("Worksheet1");
 
-                //var headerRow = new List<string[]>()
-                //{
-                //   new string[] { "BotLogId", "TimeStamp", "ConversationId", "UserId",
-                //        "ActivityId","Intent","IntentScore","Query", "Response","Feedback_Thumbs",
-                //        "Feedback_Category","Feedback_FreeForm","Country","CareerLevel","OrgLevel2","ResponseTime"}
-                //};
+                var headerRow = new List<string[]>()
+                {
+                   new string[] { "BotLogId", "TimeStamp", "ConversationId", "UserId",
+                        "ActivityId","Intent","IntentScore","Query", "Response","Feedback_Thumbs",
+                        "Feedback_Category","Feedback_FreeForm","Country","CareerLevel","OrgLevel2","ResponseTime"}
+                };
 
-                // Determine the header range (e.g. A1:D1)
-                //string headerRange = "A1:" + Char.ConvertFromUtf32(headerRow[0].Length + 64) + "1";
+                //Determine the header range (e.g.A1:D1)
+                string headerRange = "A1:" + Char.ConvertFromUtf32(headerRow[0].Length + 64) + "1";
 
                 // Target a worksheet
-                var worksheet = excel.Workbook.Worksheets["Sheet1"];
+                var worksheet = excel.Workbook.Worksheets["Worksheet1"];
+              
+                //Populates header row
+                worksheet.Cells[headerRange].LoadFromArrays(headerRow);
 
-                ////Insert table from row 1 to length of celldata.Count
-                //using (ExcelRange Rng = worksheet.Cells["B4:F12"])
-                //{
-                //    //Indirectly access ExcelTableCollection class  
-                //    ExcelTable table = worksheet.Tables.Add(Rng, "tblSalesman");
-                //    //table.Name = "tblSalesman";  
-                //    //Directly access ExcelTableCollection class  
-                //    ExcelTableCollection tblcollection = worksheet.Tables;
-                //    ExcelTable table1 = tblcollection.Add(Rng, "tblSalesman");
-                //    //Set Columns position & name  
-                //    table.Columns[0].Name = "Id";
-                //    table.Columns[1].Name = "Salesman Name";
-                //    table.Columns[2].Name = "Sales Amount";
-                //    table.Columns[3].Name = "Country";
-                //    table.Columns[4].Name = "Date";
-                //    //table.ShowHeader = false;  
-                //    table.ShowFilter = true;
-                //    //table.ShowTotal = true;  
-                //}
-
-                //Popular header row data
-                //worksheet.Cells[headerRange].LoadFromArrays(headerRow);
-
+                //Populates cells with data 
                 worksheet.Cells[2, 1].LoadFromArrays(cellData);
 
-                excel.Save();
-                //System.Diagnostics.Process.Start(excelFile.ToString());
+                //Adds table to the worksheet including header and data rows
+                worksheet.Tables.Add(new ExcelAddressBase(1, 1, cellData.Count+1, 16), "Table1");
+
+                for (int i = 1; i < 17; i++)
+                {
+                    worksheet.Column(i).Width = 20;
+                }
+              
+                excel.SaveAs(new FileInfo(fileName));
             }
 
             System.Diagnostics.Process.Start(fileName);

@@ -68,5 +68,10 @@ namespace FileReader
 
             return String.Format("{0:M/d/y} {1}{2}\t", date, time, spaces);
         }
+
+        //public static TimeSpan FormatResponseTime(TimeSpan time)
+        //{
+
+        //}
     }
 }
