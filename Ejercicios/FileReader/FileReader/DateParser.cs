@@ -22,12 +22,14 @@ namespace FileReader
             {
                 //Substracts 3 days so that "yesterday" represents last friday
                 DateParser.yesterday8AM = today8AM.Subtract(TimeSpan.FromDays(3));
-
             }
             else
             {
                 DateParser.yesterday8AM = today8AM.Subtract(TimeSpan.FromDays(1));
             }
+
+            today8AM = today8AM.Subtract(TimeSpan.FromDays(1));
+            yesterday8AM = yesterday8AM.Subtract(TimeSpan.FromDays(1));
         }
 
         public static DateTime DateFromString(string line)

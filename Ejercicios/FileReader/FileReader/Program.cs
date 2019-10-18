@@ -24,7 +24,7 @@ namespace FileReader
             DateTime yesterday8AM=DateParser.Yesterday8AM;           
 
             int length, from;
-            string fileName, dateString;
+            string fileName, dateString, username, template;
             List<string> newLines = new List<string>();
             List<string> dates = new List<string>();
 
@@ -49,7 +49,7 @@ namespace FileReader
                 dates.Add(dateString);                
             }
 
-            //newLines is reused to write to clipboard
+            //newLines is reused to write to excel
             newLines = new List<string>();
             length = dates[0].Length;
 
@@ -67,18 +67,65 @@ namespace FileReader
                 }
             }
 
+            username = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            username = username.Substring(4);
+            template = ($"C:\\Users\\{username}\\Desktop\\template.xlsx");
             fileName = String.Format("Feedback for {0:M d y}", DateTime.Now);
-            fileName = ($"C:\\Users\\Public\\Documents\\{fileName}.xlsx");
-            File.Copy("C:\\Users\\Public\\Documents\\template.xlsx", fileName);
+            fileName = ($"C:\\Users\\{username}\\Desktop\\{fileName}.xlsx");
 
-            StringBuilder clipboard = new StringBuilder();
+            List<string[]> cellData = new List<string[]>();
 
             foreach (string line in newLines)
             {
-                clipboard.Append(line);
+                cellData.Add(line.Split('\t'));
             }
 
-            Clipboard.SetText(clipboard.ToString());
+            using (ExcelPackage excel = new ExcelPackage(new FileInfo(fileName), new FileInfo(template)))
+            {
+                //excel.Workbook.Worksheets.Add("Worksheet1");
+
+                //var headerRow = new List<string[]>()
+                //{
+                //   new string[] { "BotLogId", "TimeStamp", "ConversationId", "UserId",
+                //        "ActivityId","Intent","IntentScore","Query", "Response","Feedback_Thumbs",
+                //        "Feedback_Category","Feedback_FreeForm","Country","CareerLevel","OrgLevel2","ResponseTime"}
+                //};
+
+                // Determine the header range (e.g. A1:D1)
+                //string headerRange = "A1:" + Char.ConvertFromUtf32(headerRow[0].Length + 64) + "1";
+
+                // Target a worksheet
+                var worksheet = excel.Workbook.Worksheets["Sheet1"];
+
+                ////Insert table from row 1 to length of celldata.Count
+                //using (ExcelRange Rng = worksheet.Cells["B4:F12"])
+                //{
+                //    //Indirectly access ExcelTableCollection class  
+                //    ExcelTable table = worksheet.Tables.Add(Rng, "tblSalesman");
+                //    //table.Name = "tblSalesman";  
+                //    //Directly access ExcelTableCollection class  
+                //    ExcelTableCollection tblcollection = worksheet.Tables;
+                //    ExcelTable table1 = tblcollection.Add(Rng, "tblSalesman");
+                //    //Set Columns position & name  
+                //    table.Columns[0].Name = "Id";
+                //    table.Columns[1].Name = "Salesman Name";
+                //    table.Columns[2].Name = "Sales Amount";
+                //    table.Columns[3].Name = "Country";
+                //    table.Columns[4].Name = "Date";
+                //    //table.ShowHeader = false;  
+                //    table.ShowFilter = true;
+                //    //table.ShowTotal = true;  
+                //}
+
+                //Popular header row data
+                //worksheet.Cells[headerRange].LoadFromArrays(headerRow);
+
+                worksheet.Cells[2, 1].LoadFromArrays(cellData);
+
+                excel.Save();
+                //System.Diagnostics.Process.Start(excelFile.ToString());
+            }
+
             System.Diagnostics.Process.Start(fileName);
         }
     }
