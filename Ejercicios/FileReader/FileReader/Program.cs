@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
 using OfficeOpenXml;
+using System.Net.Mail;
+using System.Reflection;
 
 namespace FileReader
 {
@@ -21,12 +23,18 @@ namespace FileReader
 
             DateTime date;
             DateTime today8AM=DateParser.Today8AM;
-            DateTime yesterday8AM=DateParser.Yesterday8AM;           
+            DateTime yesterday8AM=DateParser.Yesterday8AM;
+
+            int today = DateTime.Now.Day, todayMonth = DateTime.Now.Month;
+            int yesterday = yesterday8AM.Day, yesterdayMonth=yesterday8AM.Month;
 
             int length, from;
             string fileName, dateString, username, template;
             List<string> newLines = new List<string>();
             List<string> dates = new List<string>();
+
+            StringBuilder sender;
+            string subject, recipients, mailto, body, cc;
 
             foreach (string line in clipboardLines)
             {
@@ -45,7 +53,9 @@ namespace FileReader
                 date = date.Subtract(TimeSpan.FromHours(5));
 
                 //After the 5 hours have been substracted, checks whether it's in the desired timeframe              
-                dateString = DateParser.ContainedInTimeframe(date) ? DateParser.FormatString(date): String.Empty;
+                //dateString = DateParser.ContainedInTimeframe(date) ? DateParser.FormatString(date): String.Empty;
+                dateString = DateParser.FormatString(date);
+
                 dates.Add(dateString);                
             }
 
@@ -114,6 +124,22 @@ namespace FileReader
                 excel.SaveAs(new FileInfo(fileName));
             }
 
+
+            sender = new StringBuilder(username.Substring(0, username.IndexOf('.')));
+            sender.Replace(sender[0].ToString(), sender[0].ToString().ToUpper());
+            recipients = "daniel.julio.clas@accenture.com;daniel.julio.clas@accenture.com";
+            cc = "emanuel.e.sanchez@accenture.com;max.morillo.alvarado@accenture.com;natalia.e.gonzalez@accenture.com";
+            subject = $"Feedback for {today}/{todayMonth}";
+
+            body= "Hi team,\n\n";
+            body+=($"Attached is feedback from [{yesterdayMonth}/{yesterday} 08:00AM CST] to [{todayMonth}/{today} 08:00AM CST]\n\n");
+            body+=("Best regards,\n");
+            body+=($"{sender}.");
+
+            mailto = string.Format($"mailto:{recipients}?cc={cc}&Subject={subject}");
+            Clipboard.SetText(body);
+
+            System.Diagnostics.Process.Start(mailto);
             System.Diagnostics.Process.Start(fileName);
         }
     }
