@@ -22,64 +22,104 @@ namespace FileReader
             string[] clipboardLines = Clipboard.GetText().Split('\n');
 
             DateTime date;
-            DateTime today8AM=DateParser.Today8AM;
-            DateTime yesterday8AM=DateParser.Yesterday8AM;
+            DateTime today8AM = DateParser.Today8AM;
+            DateTime yesterday8AM = DateParser.Yesterday8AM;
 
-            int today = DateTime.Now.Day, todayMonth = DateTime.Now.Month;
-            int yesterday = yesterday8AM.Day, yesterdayMonth=yesterday8AM.Month;
+            int today = today8AM.Day, todayMonth = today8AM.Month;
+            int yesterday = yesterday8AM.Day, yesterdayMonth = yesterday8AM.Month;
 
             int length, from;
-            string fileName, dateString, username, template;
+            string fileName, dateString, username;
             List<string> newLines = new List<string>();
+            List<string> dateLines = new List<string>();
             List<string> dates = new List<string>();
+            List<string> responseTimes = new List<string>();
 
             StringBuilder sender;
             string subject, recipients, mailto, body, cc;
 
+            string responseTime;
             foreach (string line in clipboardLines)
             {
                 if (line.Length > 22)
                 {
                     //Corresponds to the date segment of the original string
                     //From is used to control for the length of the BotLogID
-                    from = line.IndexOf('\t')+1;
-                    newLines.Add(line.Substring(from, 23));
+                    from = line.IndexOf('\t') + 1;
+                    dateLines.Add(line.Substring(from, 23));
+
+                    responseTime = line.Substring(line.LastIndexOf('\t'));
+                    if (responseTime != "\tNULL\r")
+                    {
+                        responseTime = DateParser.FormatResponseTime(responseTime);
+
+                        if (responseTime.Contains(','))
+                        {
+                            responseTime = responseTime.Replace(',', '.');
+                            if (responseTime.IndexOf('.') == 1)
+                            {
+                                responseTime = "0" + responseTime;
+                            }
+                        }
+                        else
+                        {
+                            responseTime = responseTime + ".0";
+                            if (responseTime.IndexOf('.') == 1)
+                            {
+                                responseTime = "0" + responseTime;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        responseTime = "NULL\r";
+                    }
+
+                    responseTimes.Add(responseTime);
                 }
             }
 
-            foreach (string newLine in newLines)
+            foreach (string line in dateLines)
             {
-                date = DateParser.DateFromString(newLine);
+                date = DateParser.DateFromString(line);
                 date = date.Subtract(TimeSpan.FromHours(5));
 
-                //After the 5 hours have been substracted, checks whether it's in the desired timeframe              
+                //After the 5 hours have been substracted, checks whether it is in the desired timeframe              
                 //dateString = DateParser.ContainedInTimeframe(date) ? DateParser.FormatString(date): String.Empty;
                 dateString = DateParser.FormatString(date);
 
-                dates.Add(dateString);                
+                dates.Add(dateString);
             }
 
-            //newLines is reused to write to excel
+            //newLines is used to write to excel
             newLines = new List<string>();
             length = dates[0].Length;
 
             for (int i = 0; i < clipboardLines.Length; i++)
             {
+                string add;
                 //Each clipboardLine corresponds to a date in the same index
                 if (i < dates.Count && !(String.IsNullOrEmpty(dates[i])))
                 {
                     //New date is inserted, and the original removed
                     StringBuilder str = new StringBuilder(clipboardLines[i]);
-                    from = clipboardLines[i].IndexOf('\t')+1;                    
+
+                    from = clipboardLines[i].IndexOf('\t') + 1;
                     str.Insert(from, dates[i]);
                     str.Remove(from + length, 24);
-                    newLines.Add(str.ToString());
+
+                    add = str.ToString();
+                    add = add.Remove(add.LastIndexOf('\t') + 1);
+                    add += responseTimes[i];
+
+                    newLines.Add(add);
                 }
             }
 
+            //Gets user and removes \DIR from string returned
             username = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
             username = username.Substring(4);
-            template = ($"C:\\Users\\{username}\\Desktop\\template.xlsx");
+
             fileName = String.Format("Feedback for {0:M d y}", DateTime.Now);
             fileName = ($"C:\\Users\\{username}\\Desktop\\{fileName}.xlsx");
 
@@ -106,7 +146,7 @@ namespace FileReader
 
                 // Target a worksheet
                 var worksheet = excel.Workbook.Worksheets["Worksheet1"];
-              
+
                 //Populates header row
                 worksheet.Cells[headerRange].LoadFromArrays(headerRow);
 
@@ -114,30 +154,34 @@ namespace FileReader
                 worksheet.Cells[2, 1].LoadFromArrays(cellData);
 
                 //Adds table to the worksheet including header and data rows
-                worksheet.Tables.Add(new ExcelAddressBase(1, 1, cellData.Count+1, 16), "Table1");
+                worksheet.Tables.Add(new ExcelAddressBase(1, 1, cellData.Count + 1, 16), "Table1");
 
                 for (int i = 1; i < 17; i++)
                 {
                     worksheet.Column(i).Width = 20;
                 }
-              
+
+                worksheet.Cells.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
                 excel.SaveAs(new FileInfo(fileName));
             }
 
-
+            //Gets first name of user and capitalizes first letter
             sender = new StringBuilder(username.Substring(0, username.IndexOf('.')));
             sender.Replace(sender[0].ToString(), sender[0].ToString().ToUpper());
-            recipients = "daniel.julio.clas@accenture.com;daniel.julio.clas@accenture.com";
+
+
+            recipients = "alejandra.b.lucero@accenture.com;ron.stempkowski@accenture.com;m.vazquez.ferrante@accenture.com";
+
             cc = "emanuel.e.sanchez@accenture.com;max.morillo.alvarado@accenture.com;natalia.e.gonzalez@accenture.com";
+
             subject = $"Feedback for {today}/{todayMonth}";
 
-            body= "Hi team,\n\n";
-            body+=($"Attached is feedback from [{yesterdayMonth}/{yesterday} 08:00AM CST] to [{todayMonth}/{today} 08:00AM CST]\n\n");
-            body+=("Best regards,\n");
-            body+=($"{sender}.");
+            body = "Hi team,%0A%0A";
+            body += ($"Attached is feedback from [{yesterdayMonth}/{yesterday} 08:00AM CST] to [{todayMonth}/{today} 08:00AM CST]%0A%0A");
+            body += ("Best regards,%0A");
+            body += ($"{sender}.");
 
-            mailto = string.Format($"mailto:{recipients}?cc={cc}&Subject={subject}");
-            Clipboard.SetText(body);
+            mailto = string.Format($"mailto:{recipients}?cc={cc}&Subject={subject}&body={body}");
 
             System.Diagnostics.Process.Start(mailto);
             System.Diagnostics.Process.Start(fileName);

@@ -27,9 +27,6 @@ namespace FileReader
             {
                 DateParser.yesterday8AM = today8AM.Subtract(TimeSpan.FromDays(1));
             }
-
-            today8AM = today8AM.Subtract(TimeSpan.FromDays(1));
-            yesterday8AM = yesterday8AM.Subtract(TimeSpan.FromDays(1));
         }
 
         public static DateTime DateFromString(string line)
@@ -69,9 +66,18 @@ namespace FileReader
             return String.Format("{0:M/d/y} {1}{2}\t", date, time, spaces);
         }
 
-        //public static TimeSpan FormatResponseTime(TimeSpan time)
-        //{
+        public static string FormatResponseTime(string time)
+        {
+            //Original format: 00:00:01.8633333
+            string subString = time.Substring(time.LastIndexOf(':') + 1);
+            subString = subString.Trim('\r');
+            subString = subString.Replace('.', ',');
 
-        //}
+            double formattedTime = double.Parse(subString);
+
+            formattedTime = Math.Round(formattedTime, 1);
+
+            return formattedTime.ToString();
+        }
     }
 }
