@@ -19,6 +19,7 @@ namespace FileReader
             //Original format: 2019-10-15 13:27:23.160
             //Character count: 23
 
+            #region Variables
             string[] clipboardLines = Clipboard.GetText().Split('\n');
 
             DateTime date;
@@ -37,8 +38,9 @@ namespace FileReader
 
             StringBuilder sender;
             string subject, recipients, mailto, body, cc;
-
             string responseTime;
+            #endregion
+
             foreach (string line in clipboardLines)
             {
                 if (line.Length > 22)
@@ -85,8 +87,7 @@ namespace FileReader
                 date = date.Subtract(TimeSpan.FromHours(5));
 
                 //After the 5 hours have been substracted, checks whether it is in the desired timeframe              
-                //dateString = DateParser.ContainedInTimeframe(date) ? DateParser.FormatString(date): String.Empty;
-                dateString = DateParser.FormatString(date);
+                dateString = DateParser.ContainedInTimeframe(date) ? DateParser.FormatString(date) : String.Empty;
 
                 dates.Add(dateString);
             }
@@ -130,6 +131,7 @@ namespace FileReader
                 cellData.Add(line.Split('\t'));
             }
 
+            #region Excel
             using (ExcelPackage excel = new ExcelPackage())
             {
                 excel.Workbook.Worksheets.Add("Worksheet1");
@@ -164,11 +166,12 @@ namespace FileReader
                 worksheet.Cells.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
                 excel.SaveAs(new FileInfo(fileName));
             }
+            #endregion
 
+            #region Mailer
             //Gets first name of user and capitalizes first letter
             sender = new StringBuilder(username.Substring(0, username.IndexOf('.')));
             sender.Replace(sender[0].ToString(), sender[0].ToString().ToUpper());
-
 
             recipients = "alejandra.b.lucero@accenture.com;ron.stempkowski@accenture.com;m.vazquez.ferrante@accenture.com";
 
@@ -182,6 +185,7 @@ namespace FileReader
             body += ($"{sender}.");
 
             mailto = string.Format($"mailto:{recipients}?cc={cc}&Subject={subject}&body={body}");
+            #endregion
 
             System.Diagnostics.Process.Start(mailto);
             System.Diagnostics.Process.Start(fileName);
