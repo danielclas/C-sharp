@@ -41,6 +41,8 @@ namespace FileReader
             string responseTime;
             #endregion
 
+            #region Read and format
+
             foreach (string line in clipboardLines)
             {
                 if (line.Length > 22)
@@ -51,7 +53,7 @@ namespace FileReader
                     dateLines.Add(line.Substring(from, 23));
 
                     responseTime = line.Substring(line.LastIndexOf('\t'));
-                    if (responseTime != "\tNULL\r")
+                    /*if (responseTime != "\tNULL\r")
                     {
                         responseTime = DateParser.FormatResponseTime(responseTime);
 
@@ -75,7 +77,7 @@ namespace FileReader
                     else
                     {
                         responseTime = "NULL\r";
-                    }
+                    }*/
 
                     responseTimes.Add(responseTime);
                 }
@@ -110,7 +112,7 @@ namespace FileReader
                     str.Remove(from + length, 24);
 
                     add = str.ToString();
-                    add = add.Remove(add.LastIndexOf('\t') + 1);
+                    add = add.Remove(add.LastIndexOf('\t'));
                     add += responseTimes[i];
 
                     newLines.Add(add);
@@ -130,6 +132,7 @@ namespace FileReader
             {
                 cellData.Add(line.Split('\t'));
             }
+            #endregion
 
             #region Excel
             using (ExcelPackage excel = new ExcelPackage())
@@ -158,6 +161,17 @@ namespace FileReader
                 //Adds table to the worksheet including header and data rows
                 worksheet.Tables.Add(new ExcelAddressBase(1, 1, cellData.Count + 1, 16), "Table1");
 
+                int totalRows = cellData.Count + 1;
+                string respTime;
+
+                for (int row = 2; row < totalRows; row++)
+                {
+                    respTime = worksheet.Cells[row, 16].Text;
+                    Console.WriteLine(respTime);
+                    //respTime = DateParser.FormatResponseTime(respTime);
+                    //worksheet.Cells[row, 16].Value = respTime;
+                }
+
                 for (int i = 1; i < 17; i++)
                 {
                     worksheet.Column(i).Width = 20;
@@ -180,9 +194,9 @@ namespace FileReader
             subject = $"Feedback for {today}/{todayMonth}";
 
             body = "Hi team,%0A%0A";
-            body += ($"Attached is feedback from [{yesterdayMonth}/{yesterday} 08:00AM CST] to [{todayMonth}/{today} 08:00AM CST]%0A%0A");
-            body += ("Best regards,%0A");
-            body += ($"{sender}.");
+            body += $"Attached is feedback from [{yesterdayMonth}/{yesterday} 08:00AM CST] to [{todayMonth}/{today} 08:00AM CST]%0A%0A";
+            body += "Best regards,%0A";
+            body += $"{sender}.";
 
             mailto = string.Format($"mailto:{recipients}?cc={cc}&Subject={subject}&body={body}");
             #endregion
