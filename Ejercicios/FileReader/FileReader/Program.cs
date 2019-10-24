@@ -23,99 +23,57 @@ namespace FileReader
             string[] clipboardLines = Clipboard.GetText().Split('\n');
 
             DateTime date;
-            DateTime today8AM = DateParser.Today8AM;
-            DateTime yesterday8AM = DateParser.Yesterday8AM;
 
-            int today = today8AM.Day, todayMonth = today8AM.Month;
-            int yesterday = yesterday8AM.Day, yesterdayMonth = yesterday8AM.Month;
+            int today = DateParser.Today8AM.Day, todayMonth = DateParser.Today8AM.Month;
+            int yesterday = DateParser.Yesterday8AM.Day, yesterdayMonth = DateParser.Yesterday8AM.Month;
 
-            int length, from;
-            string fileName, dateString, username;
-            List<string> newLines = new List<string>();
-            List<string> dateLines = new List<string>();
+            int length, from, totalRows;
+            string dateLine, fileName, dateString, username, responseTime;
+
+            List<string> excelLines = new List<string>();
             List<string> dates = new List<string>();
-            List<string> responseTimes = new List<string>();
+            List<string[]> cellData = new List<string[]>();
 
             StringBuilder sender;
             string subject, recipients, mailto, body, cc;
-            string responseTime;
             #endregion
 
             #region Read and format
-
             foreach (string line in clipboardLines)
             {
                 if (line.Length > 22)
                 {
                     //Corresponds to the date segment of the original string
-                    //From is used to control for the length of the BotLogID
+                    //"From" is used to control for the length of the BotLogID
                     from = line.IndexOf('\t') + 1;
-                    dateLines.Add(line.Substring(from, 23));
+                    dateLine = line.Substring(from, 23);
 
-                    responseTime = line.Substring(line.LastIndexOf('\t'));
-                    /*if (responseTime != "\tNULL\r")
-                    {
-                        responseTime = DateParser.FormatResponseTime(responseTime);
+                    date = DateParser.DateFromString(dateLine);
+                    date = date.Subtract(TimeSpan.FromHours(5));
 
-                        if (responseTime.Contains(','))
-                        {
-                            responseTime = responseTime.Replace(',', '.');
-                            if (responseTime.IndexOf('.') == 1)
-                            {
-                                responseTime = "0" + responseTime;
-                            }
-                        }
-                        else
-                        {
-                            responseTime = responseTime + ".0";
-                            if (responseTime.IndexOf('.') == 1)
-                            {
-                                responseTime = "0" + responseTime;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        responseTime = "NULL\r";
-                    }*/
+                    //After the 5 hours have been substracted, checks whether it is in the desired timeframe              
+                    dateString = DateParser.ContainedInTimeframe(date) ? DateParser.FormatString(date) : String.Empty;
 
-                    responseTimes.Add(responseTime);
+                    dates.Add(dateString);
                 }
             }
 
-            foreach (string line in dateLines)
-            {
-                date = DateParser.DateFromString(line);
-                date = date.Subtract(TimeSpan.FromHours(5));
-
-                //After the 5 hours have been substracted, checks whether it is in the desired timeframe              
-                dateString = DateParser.ContainedInTimeframe(date) ? DateParser.FormatString(date) : String.Empty;
-
-                dates.Add(dateString);
-            }
-
             //newLines is used to write to excel
-            newLines = new List<string>();
             length = dates[0].Length;
 
             for (int i = 0; i < clipboardLines.Length; i++)
             {
-                string add;
                 //Each clipboardLine corresponds to a date in the same index
                 if (i < dates.Count && !(String.IsNullOrEmpty(dates[i])))
                 {
                     //New date is inserted, and the original removed
-                    StringBuilder str = new StringBuilder(clipboardLines[i]);
+                    StringBuilder excelLine = new StringBuilder(clipboardLines[i]);
 
                     from = clipboardLines[i].IndexOf('\t') + 1;
-                    str.Insert(from, dates[i]);
-                    str.Remove(from + length, 24);
+                    excelLine.Insert(from, dates[i]);
+                    excelLine.Remove(from + length, 24);
 
-                    add = str.ToString();
-                    add = add.Remove(add.LastIndexOf('\t'));
-                    add += responseTimes[i];
-
-                    newLines.Add(add);
+                    excelLines.Add(excelLine.ToString());
                 }
             }
 
@@ -126,9 +84,7 @@ namespace FileReader
             fileName = String.Format("Feedback for {0:M d y}", DateTime.Now);
             fileName = ($"C:\\Users\\{username}\\Desktop\\{fileName}.xlsx");
 
-            List<string[]> cellData = new List<string[]>();
-
-            foreach (string line in newLines)
+            foreach (string line in excelLines)
             {
                 cellData.Add(line.Split('\t'));
             }
@@ -161,15 +117,19 @@ namespace FileReader
                 //Adds table to the worksheet including header and data rows
                 worksheet.Tables.Add(new ExcelAddressBase(1, 1, cellData.Count + 1, 16), "Table1");
 
-                int totalRows = cellData.Count + 1;
-                string respTime;
+                totalRows = cellData.Count+1;
 
-                for (int row = 2; row < totalRows; row++)
+                for (int row = 2; row <= totalRows; row++)
                 {
-                    respTime = worksheet.Cells[row, 16].Text;
-                    Console.WriteLine(respTime);
-                    //respTime = DateParser.FormatResponseTime(respTime);
-                    //worksheet.Cells[row, 16].Value = respTime;
+                    responseTime = worksheet.Cells[row, 16].Text;
+                    //Response time value from database can sometimes be NULL
+                    if (responseTime != "NULL\r")
+                    {
+                        //worksheet.Cells[row, 16].Style.Numberformat.Format = "00.0";
+                        //value = DateParser.FormatResponseTime(responseTime);
+                        //worksheet.SetValue(row, 17, value);
+                        worksheet.Cells[row, 16].Value = DateParser.FormatResponseTime(responseTime);
+                    }
                 }
 
                 for (int i = 1; i < 17; i++)

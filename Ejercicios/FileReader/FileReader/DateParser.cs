@@ -50,7 +50,7 @@ namespace FileReader
 
         public static bool ContainedInTimeframe(DateTime date)
         {
-            return (date >= DateParser.yesterday8AM && date <= DateParser.today8AM);
+            return date >= DateParser.yesterday8AM && date <= DateParser.today8AM;
         }
 
         public static string FormatString(DateTime date)
@@ -66,18 +66,56 @@ namespace FileReader
             return String.Format("{0:M/d/y} {1}{2}\t", date, time, spaces);
         }
 
-        public static string FormatResponseTime(string time)
+        public static double FormatResponseTime(string time)
         {
             //Original format: 00:00:01.8633333
+            double formattedTime;
             string subString = time.Substring(time.LastIndexOf(':') + 1);
             subString = subString.Trim('\r');
             subString = subString.Replace('.', ',');
 
-            double formattedTime = double.Parse(subString);
+            formattedTime = double.Parse(subString);
 
             formattedTime = Math.Round(formattedTime, 1);
 
-            return formattedTime.ToString();
+            //Controls for decimals and adds necessary extra characters
+            //if (returnString.Contains(','))
+            //{
+            //    returnString = returnString.Replace(',', '.');
+            //    if (returnString.IndexOf('.') == 1)
+            //    {
+            //        returnString = "0" + returnString;
+            //    }
+            //}
+            //else
+            //{
+            //    returnString = returnString + ".0";
+            //    if (returnString.IndexOf('.') == 1)
+            //    {
+            //        returnString = "0" + returnString;
+            //    }
+            //}
+
+            return formattedTime;
+        }
+
+        public static string NewFormatResponseTime(string time)
+        {
+            //00:00:01.5400000
+            TimeSpan timeSpan;
+            int hh, mm, ss, ff;
+            string responseTime;
+
+            hh = int.Parse(time.Substring(0, 2));
+            mm = int.Parse(time.Substring(3, 2));
+            ss = int.Parse(time.Substring(6, 2));
+            ff = int.Parse(time.Substring(9));
+
+            timeSpan = new TimeSpan(1,hh,mm,ss,ff);
+            responseTime = String.Format("0:s.ff", timeSpan);
+
+            return responseTime;
+
         }
     }
 }
