@@ -19,6 +19,7 @@ namespace FileReader
             //Original format: 2019-10-15 13:27:23.160
             //Character count: 23
 
+            Console.WriteLine("\nCreando excel..");
             #region Variables
             string[] clipboardLines = Clipboard.GetText().Split('\n');
 
@@ -58,9 +59,7 @@ namespace FileReader
                 }
             }
 
-            //newLines is used to write to excel
             length = dates[0].Length;
-
             for (int i = 0; i < clipboardLines.Length; i++)
             {
                 //Each clipboardLine corresponds to a date in the same index
@@ -125,9 +124,7 @@ namespace FileReader
                     //Response time value from database can sometimes be NULL
                     if (responseTime != "NULL\r")
                     {
-                        //worksheet.Cells[row, 16].Style.Numberformat.Format = "00.0";
-                        //value = DateParser.FormatResponseTime(responseTime);
-                        //worksheet.SetValue(row, 17, value);
+                        worksheet.Cells[row, 16].Style.Numberformat.Format = "@";
                         worksheet.Cells[row, 16].Value = DateParser.FormatResponseTime(responseTime);
                     }
                 }
