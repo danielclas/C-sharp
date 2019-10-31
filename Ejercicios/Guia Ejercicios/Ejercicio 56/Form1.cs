@@ -13,7 +13,7 @@ namespace Ejercicio_56
 {
   public partial class Form1 : Form
   {
-    public static FileInfo file=null;
+    public static FileInfo file = null;
 
     public Form1()
     {
@@ -26,9 +26,14 @@ namespace Ejercicio_56
 
       o.ShowDialog();
 
-      if (o.CheckFileExists)
+      if (o.CheckFileExists && o.FileName!="")
       {
         file = new FileInfo(o.FileName);
+
+        using (StreamReader reader = new StreamReader(file.FullName))
+        {
+          this.richTextBox1.Text = reader.ReadToEnd();          
+        }
       }
     }
 
@@ -41,21 +46,38 @@ namespace Ejercicio_56
     {
       if (file is null)
       {
-        guardarComoToolStripMenuItem_Click(new object(), new EventArgs());
+        guardarComoToolStripMenuItem_Click(sender, e);
       }
       else
       {
-        StreamWriter writer = new StreamWriter(file.Name);
-
-        writer.Write(richTextBox1.Text);
-
-        writer.Close();
+        this.EscribirEnArchivo(file.FullName);
       }
     }
 
     private void guardarComoToolStripMenuItem_Click(object sender, EventArgs e)
     {
+      SaveFileDialog s = new SaveFileDialog();
 
+      s.ShowDialog();
+
+      if (s.CheckPathExists && s.FileName!="")
+      {
+        file = new FileInfo(s.FileName);
+        this.EscribirEnArchivo(file.FullName);
+      }
+    }
+
+    private void EscribirEnArchivo(string fileName)
+    {
+      StreamWriter writer = new StreamWriter(fileName);
+      string[] arr = richTextBox1.Text.Split('\n');
+
+      foreach (string s in arr)
+      {
+        writer.WriteLine(s);
+      }
+
+      writer.Close();
     }
   }
 }
