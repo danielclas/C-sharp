@@ -14,24 +14,13 @@ namespace Ejercicio_57
     {
       Console.Title = "Ejercicio 57";
 
-
-      //b.En el Main instanciar un objeto del tipo Persona e intentar serializarlo.
-      //c.Luego intentar leer ese objeto serializado en una nueva instancia de persona y lo muestre
-      //por pantalla.
-      //d.Por cada excepción que lance la aplicación:
-      //  i.Generar un catch que la capture y la maneje.
-      //ii.Luego corregir el problema que genera la excepción.
-      //iii.Repetir el proceso hasta capturar todas las excepciones de forma individual(no
-      //utilizar Exception).
-      //iv.Los datos de la Persona guardada deben ser el nombre y el apellido, y coincidir con
-      //     los de la Persona leída
-      Persona alguien = new Persona("Nombre", "Apellido");
+      Persona alguien = new Persona("Juan", "Carlos");
 
       Console.WriteLine($"Muestro persona creada: {alguien.ToString()}");
       Console.WriteLine("Intento serializar..");
       Console.ReadKey();
 
-      XmlTextWriter writer = new XmlTextWriter("D:\\a.xml", Encoding.Default);
+      XmlTextWriter writer = new XmlTextWriter("D:\\aaaPersona.xml", Encoding.UTF8);
       XmlSerializer serializer = new XmlSerializer(typeof(Persona));
 
       serializer.Serialize(writer, alguien);
@@ -39,6 +28,7 @@ namespace Ejercicio_57
       writer.Close();
 
       Console.WriteLine("El archivo fue creado..");
+      Console.WriteLine(alguien.ToString());
       Console.ReadKey();
 
 

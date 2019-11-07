@@ -17,8 +17,8 @@ namespace Ejercicio_57
     private string nombre;
     private string apellido;
 
-    public string Nombre { get { return nombre; } }
-    public string Apellido { get { return apellido; } }
+    public string Nombre { get { return nombre; } set { } }
+    public string Apellido { get { return apellido; } set {  } }
 
     public Persona()
     {
