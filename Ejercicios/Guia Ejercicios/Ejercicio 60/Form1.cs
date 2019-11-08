@@ -23,7 +23,7 @@ namespace Ejercicio_60
 
     private void Form1_Load(object sender, EventArgs e)
     {
-        string connectionString = "Data Source=LAB3PC02\\SQLEXPRESS; Initial Catalog=AdventureWorks2012; Integrated Security=True";
+        string connectionString = "Data Source=LAB3PC01\\SQLEXPRESS; Initial Catalog=AdventureWorks2012; Integrated Security=True";
 
         connection = new SqlConnection(connectionString);
         readCommand = new SqlCommand();
@@ -52,5 +52,6 @@ namespace Ejercicio_60
 
       connection.Close();
     }
+
   }
 }
