@@ -16,7 +16,7 @@ namespace FileReader
 
         static DateParser()
         {
-            DateParser.today8AM = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 8, 0, 0);
+            DateParser.today8AM = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 7, 0, 0);
 
             if (DateTime.Now.DayOfWeek == DayOfWeek.Monday)
             {

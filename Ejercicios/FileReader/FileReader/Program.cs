@@ -50,7 +50,7 @@ namespace FileReader
                     dateLine = line.Substring(from, 23);
 
                     date = DateParser.DateFromString(dateLine);
-                    date = date.Subtract(TimeSpan.FromHours(5));
+                    date = date.Subtract(TimeSpan.FromHours(6));
 
                     //After the 5 hours have been substracted, checks whether it is in the desired timeframe              
                     dateString = DateParser.ContainedInTimeframe(date) ? DateParser.FormatString(date) : String.Empty;
