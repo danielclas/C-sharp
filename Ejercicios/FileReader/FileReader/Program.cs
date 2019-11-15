@@ -25,8 +25,8 @@ namespace FileReader
 
             DateTime date;
 
-            int today = DateParser.Today8AM.Day, todayMonth = DateParser.Today8AM.Month;
-            int yesterday = DateParser.Yesterday8AM.Day, yesterdayMonth = DateParser.Yesterday8AM.Month;
+            int today = DateParser.Today7AM.Day, todayMonth = DateParser.Today7AM.Month;
+            int yesterday = DateParser.Yesterday7AM.Day, yesterdayMonth = DateParser.Yesterday7AM.Month;
 
             int length, from, totalRows;
             string dateLine, fileName, dateString, username, responseTime;
@@ -146,12 +146,12 @@ namespace FileReader
 
             recipients = "alejandra.b.lucero@accenture.com;ron.stempkowski@accenture.com;m.vazquez.ferrante@accenture.com";
 
-            cc = "emanuel.e.sanchez@accenture.com;max.morillo.alvarado@accenture.com;natalia.e.gonzalez@accenture.com";
+            cc = "CIO.ContentApps.OpsDelivery.Dev@accenture.com";
 
             subject = $"Feedback for {today}/{todayMonth}";
 
             body = "Hi team,%0A%0A";
-            body += $"Attached is feedback from [{yesterdayMonth}/{yesterday} 08:00AM CST] to [{todayMonth}/{today} 08:00AM CST]%0A%0A";
+            body += $"Attached is feedback from [{yesterdayMonth}/{yesterday} 07:00AM CST] to [{todayMonth}/{today} 07:00AM CST]%0A%0A";
             body += "Best regards,%0A";
             body += $"{sender}.";
 

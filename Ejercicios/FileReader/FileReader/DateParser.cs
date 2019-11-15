@@ -8,24 +8,24 @@ namespace FileReader
 {
     public static class DateParser
     {
-        static DateTime today8AM;
-        static DateTime yesterday8AM;
+        static DateTime today7AM;
+        static DateTime yesterday7AM;
 
-        public static DateTime Today8AM { get { return DateParser.today8AM; } }
-        public static DateTime Yesterday8AM { get { return DateParser.yesterday8AM; } }
+        public static DateTime Today7AM { get { return DateParser.today7AM; } }
+        public static DateTime Yesterday7AM { get { return DateParser.yesterday7AM; } }
 
         static DateParser()
         {
-            DateParser.today8AM = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 7, 0, 0);
+            DateParser.today7AM = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 7, 0, 0);
 
             if (DateTime.Now.DayOfWeek == DayOfWeek.Monday)
             {
                 //Substracts 3 days so that "yesterday" represents last friday
-                DateParser.yesterday8AM = today8AM.Subtract(TimeSpan.FromDays(3));
+                DateParser.yesterday7AM = today7AM.Subtract(TimeSpan.FromDays(3));
             }
             else
             {
-                DateParser.yesterday8AM = today8AM.Subtract(TimeSpan.FromDays(1));
+                DateParser.yesterday7AM = today7AM.Subtract(TimeSpan.FromDays(1));
             }
         }
        
@@ -50,7 +50,7 @@ namespace FileReader
 
         public static bool ContainedInTimeframe(DateTime date)
         {
-            return date >= DateParser.yesterday8AM && date <= DateParser.today8AM;
+            return date >= DateParser.yesterday7AM && date <= DateParser.today7AM;
         }
 
         public static string FormatString(DateTime date)
