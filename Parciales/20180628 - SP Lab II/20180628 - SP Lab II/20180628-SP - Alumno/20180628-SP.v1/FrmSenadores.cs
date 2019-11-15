@@ -141,7 +141,7 @@ namespace _20180628_SP.v1
 
     private void FrmSenadores_FormClosing(object sender, FormClosingEventArgs e)
     {
-      //thread.Abort();
+      thread.Abort();
     }
 
     private void FrmSenadores_Load(object sender, EventArgs e)
