@@ -35,7 +35,7 @@ namespace ComiqueriaLogic.Comun
       }
       catch(Exception)
       {
-        throw new Exception("Aprobame igual");
+        throw new Exception("Siga siga");
       }
 
       return rtnVal;

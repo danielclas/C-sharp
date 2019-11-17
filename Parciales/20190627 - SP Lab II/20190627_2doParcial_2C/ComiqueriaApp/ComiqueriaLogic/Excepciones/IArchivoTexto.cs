@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ComiqueriaLogic.Excepciones
 {
-  interface IArchivoTexto<T>
+  public interface IArchivoTexto<T>
   {
     string Ruta { get; }
     string Texto { get; }
