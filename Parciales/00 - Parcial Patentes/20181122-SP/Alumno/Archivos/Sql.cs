@@ -44,34 +44,17 @@ namespace Archivos
         public void Leer(string tabla, out Queue<Patente> datos)
         {
             List<string> patentes = new List<string>();
-            List<string> tipos = new List<string>();
-            Patente.Tipo tipo;
             Queue<Patente> queue = new Queue<Patente>();
 
             try
             {
                 this.conexion.Open();
-                this.comando.CommandText = $"SELECT * FROM dbo.{tabla}";
+                this.comando.CommandText = $"SELECT patente FROM dbo.{tabla}";
                 SqlDataReader reader = comando.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    patentes.Add(reader[0].ToString());
-                    tipos.Add(reader[1].ToString());
-                }
-
-                for (int i = 0; i < patentes.Count; i++)
-                {
-                    if (tipos[i]=="Mercosur")
-                    {
-                        tipo = Patente.Tipo.Mercosur;
-                    }
-                    else
-                    {
-                        tipo = Patente.Tipo.Vieja;
-                    }
-
-                    queue.Enqueue(new Patente(patentes[i], tipo));
+                    queue.Enqueue(reader[0].ToString().ValidarPatente());
                 }
             }
             catch (Exception e)
@@ -88,10 +71,12 @@ namespace Archivos
 
         public Sql()
         {
-            SqlConnectionStringBuilder connString = new SqlConnectionStringBuilder();
-            connString.IntegratedSecurity = true;
-            connString.DataSource = ".\\SQLEXPRESS";
-            connString.InitialCatalog = "patentes-sp-2018";
+            SqlConnectionStringBuilder connString = new SqlConnectionStringBuilder()
+            {
+                IntegratedSecurity = true,
+                DataSource = ".\\SQLEXPRESS",
+                InitialCatalog = "patentes-sp-2018"
+            };
 
             this.comando = new SqlCommand();
             this.conexion = new SqlConnection(connString.ToString());

@@ -10,8 +10,10 @@ namespace Ayuda_Parcial
     {
         static void Main(string[] args)
         {
-            Persona persona = new Persona("Daniel", "Clas", new DateTime(1996, 2, 6), 39328065);
-            string path = "C:\\Users\\daniel.julio.clas\\Desktop\\laboratorio-2\\Ejercicios\\Ayuda Parcial";
+            Persona persona = new Persona("Daniel", "Clas", 39328065);
+            Persona personaXML;
+            Persona personaSQL;
+            string path = "C:\\Users\\Dani\\Desktop\\laboratorio-2\\Ejercicios\\Ayuda Parcial";
 
             XML<Persona> xml = new XML<Persona>();
             Texto<Persona> texto = new Texto<Persona>();
@@ -19,7 +21,13 @@ namespace Ayuda_Parcial
 
             xml.Guardar(path+"\\XML.xml", persona);
             texto.Guardar(path + "\\texto.txt", persona);
-            //dao.Guardar("", persona);
+            dao.Guardar("", persona);
+
+            personaXML=xml.Leer(path+"\\XML.xml");
+            personaSQL = dao.Leer("");
+
+            Console.WriteLine("Persona XML: "+personaXML.ToString());
+            Console.WriteLine("Persona SQL: "+personaSQL.ToString());
 
             Console.Read();
         }

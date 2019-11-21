@@ -44,7 +44,7 @@ namespace Ayuda_Parcial
                 serializer.Serialize(writer, objeto);
                 writer.Close();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 rtnVal = false;
             }

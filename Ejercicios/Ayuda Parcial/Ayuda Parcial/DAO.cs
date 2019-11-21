@@ -12,14 +12,53 @@ namespace Ayuda_Parcial
     {
         public Persona Leer(string path)
         {
-            throw new NotImplementedException();
+            Persona persona = null;
+            List<int> lista = new List<int>();
+            string nombre ="", apellido="";
+            int dni=0;
+
+            SqlConnectionStringBuilder connString = new SqlConnectionStringBuilder();
+            connString.IntegratedSecurity = true;
+            connString.DataSource = ".\\SQLEXPRESS";
+            connString.InitialCatalog = "Persona";
+
+            SqlConnection connection = new SqlConnection(connString.ToString());
+
+            try
+            {
+                SqlCommand command = new SqlCommand();
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = $"select * from dbo.Personas where nombre='Juan'";
+                command.Connection = connection;
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    nombre = reader[0].ToString();
+                    apellido = reader[1].ToString();
+                    dni = int.Parse(reader[2].ToString());
+                }
+
+                persona = new Persona(nombre, apellido, dni);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return persona;
+
         }
 
         public bool Guardar(string path, Persona objeto)
         {
             string nombre, apellido;
             int dni, insertados=0;
-            DateTime fecha;
             SqlConnectionStringBuilder connString = new SqlConnectionStringBuilder();
             connString.IntegratedSecurity = true;
             connString.DataSource = ".\\SQLEXPRESS";
@@ -30,13 +69,12 @@ namespace Ayuda_Parcial
             nombre = objeto.Nombre;
             apellido = objeto.Apellido;
             dni = objeto.Dni;
-            fecha = objeto.FechaNac;
 
             try
             {
                 SqlCommand command = new SqlCommand();
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = $"INSERT INTO Persona (nombre, apellido, dni, fecha) values ('{nombre}', '{apellido}', {dni}, {fecha})";
+                command.CommandText = $"INSERT INTO dbo.Personas (nombre, apellido, dni) values ('{nombre}', '{apellido}', {dni})";
 
                 command.Connection = connection;
                 connection.Open();
