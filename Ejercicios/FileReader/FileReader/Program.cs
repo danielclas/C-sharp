@@ -98,7 +98,7 @@ namespace FileReader
                 {
                    new string[] { "BotLogId", "TimeStamp", "ConversationId", "UserId",
                         "ActivityId","Intent","IntentScore","Query", "Response","Feedback_Thumbs",
-                        "Feedback_Category","Feedback_FreeForm","Country","CareerLevel","OrgLevel2","ResponseTime"}
+                        "Feedback_Category","Feedback_FreeForm","Country/Location","CareerLevel","OrgLevel2","ResponseTime"}
                 };
 
                 //Determine the header range (e.g.A1:D1)
